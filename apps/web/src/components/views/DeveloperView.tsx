@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import Repo3DViewer from '../visualization/Repo3DViewer';
+import Enhanced3DViewer from '../visualization/Enhanced3DViewer';
 
 export default function DeveloperView() {
   const [repoUrl, setRepoUrl] = useState('');
   const [visualizing, setVisualizing] = useState(false);
   const [repoInfo, setRepoInfo] = useState<{ owner: string; repo: string } | null>(null);
+  const [useEnhancedView, setUseEnhancedView] = useState(true);
 
   const handleVisualize = () => {
     if (!repoUrl) return;
@@ -107,16 +109,42 @@ export default function DeveloperView() {
             <h2 className="text-2xl font-bold">
               {repoInfo?.owner}/{repoInfo?.repo}
             </h2>
-            <button
-              onClick={() => setVisualizing(false)}
-              className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition"
-            >
-              ← Back to Search
-            </button>
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center bg-gray-800 rounded-lg p-1">
+                <button
+                  onClick={() => setUseEnhancedView(false)}
+                  className={`px-3 py-1 rounded text-sm transition ${
+                    !useEnhancedView ? 'bg-orange-600 text-white' : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  Basic
+                </button>
+                <button
+                  onClick={() => setUseEnhancedView(true)}
+                  className={`px-3 py-1 rounded text-sm transition ${
+                    useEnhancedView ? 'bg-orange-600 text-white' : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  Enhanced
+                </button>
+              </div>
+              <button
+                onClick={() => setVisualizing(false)}
+                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition"
+              >
+                ← Back to Search
+              </button>
+            </div>
           </div>
 
           <div className="flex-1 card p-0 overflow-hidden">
-            {repoInfo && <Repo3DViewer owner={repoInfo.owner} repo={repoInfo.repo} />}
+            {repoInfo && (
+              useEnhancedView ? (
+                <Enhanced3DViewer owner={repoInfo.owner} repo={repoInfo.repo} />
+              ) : (
+                <Repo3DViewer owner={repoInfo.owner} repo={repoInfo.repo} />
+              )
+            )}
           </div>
         </div>
       )}

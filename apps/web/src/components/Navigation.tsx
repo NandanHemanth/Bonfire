@@ -29,6 +29,9 @@ export default function Navigation({ userRole, onRoleChange }: NavigationProps) 
               <Link to="/developer" className="text-gray-300 hover:text-white px-3 py-2 rounded-md">
                 Visualize
               </Link>
+              <Link to="/workflows" className="text-gray-300 hover:text-white px-3 py-2 rounded-md">
+                Workflows
+              </Link>
               <Link to="/data-analysis" className="text-gray-300 hover:text-white px-3 py-2 rounded-md">
                 Data Analysis
               </Link>

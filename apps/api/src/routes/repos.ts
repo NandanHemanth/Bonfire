@@ -1,6 +1,7 @@
 import express from 'express';
 import { parseRepository, analyzeCodeStructure } from '../services/github-parser.js';
 import { generateRepoLegend } from '../services/gemini-analyzer.js';
+import { analyzeRepository, detectIntegrations } from '../services/code-analyzer.js';
 
 const router = express.Router();
 
@@ -43,6 +44,32 @@ router.post('/:owner/:repo/analyze', async (req, res, next) => {
 
     const analysis = await analyzeCodeStructure(owner, repo, path, branch);
     res.json(analysis);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Deep code analysis - functions, connections, APIs, hierarchy
+router.get('/:owner/:repo/deep-analysis', async (req, res, next) => {
+  try {
+    const { owner, repo } = req.params;
+    const branch = req.query.branch as string || 'main';
+
+    const analysis = await analyzeRepository(owner, repo, branch);
+    res.json(analysis);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Detect integrations (Slack, Jira, APIs, etc.)
+router.get('/:owner/:repo/integrations', async (req, res, next) => {
+  try {
+    const { owner, repo } = req.params;
+    const branch = req.query.branch as string || 'main';
+
+    const integrations = await detectIntegrations(owner, repo, branch);
+    res.json(integrations);
   } catch (error) {
     next(error);
   }

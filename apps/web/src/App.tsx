@@ -7,6 +7,7 @@ import HRView from './components/views/HRView';
 import PMView from './components/views/PMView';
 import DevOpsView from './components/views/DevOpsView';
 import DataAnalyzer from './components/data/DataAnalyzer';
+import WorkflowBuilder from './components/workflows/WorkflowBuilder';
 
 export type UserRole = 'developer' | 'finance' | 'hr' | 'pm' | 'devops';
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/pm" element={<PMView />} />
             <Route path="/devops" element={<DevOpsView />} />
             <Route path="/data-analysis" element={<DataAnalyzer />} />
+            <Route path="/workflows" element={<WorkflowBuilder />} />
           </Routes>
         </main>
       </div>

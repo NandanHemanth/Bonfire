@@ -8,6 +8,7 @@ import errorHandler from './middleware/errorHandler.js';
 import repoRoutes from './routes/repos.js';
 import dataRoutes from './routes/data.js';
 import mcpRoutes from './routes/mcp.js';
+import workflowRoutes from './routes/workflows.js';
 
 // Load environment variables
 dotenv.config();
@@ -51,6 +52,7 @@ app.get('/health', (req, res) => {
 app.use('/api/repos', repoRoutes);
 app.use('/api/data', dataRoutes);
 app.use('/api/mcp', mcpRoutes);
+app.use('/api', workflowRoutes);
 
 // 404 handler
 app.use((req, res) => {
