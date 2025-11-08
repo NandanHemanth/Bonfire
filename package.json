@@ -1,0 +1,55 @@
+{
+  "name": "bonfire",
+  "version": "1.0.0",
+  "description": "Enterprise Code & Data Intelligence Platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "packages/mcp-servers/*"
+  ],
+  "scripts": {
+    "dev:all": "concurrently \"npm run dev:web\" \"npm run dev:api\" \"npm run dev:mcp\"",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:mcp": "npm run dev --workspace=packages/mcp-servers/finance",
+    "build": "npm run build --workspaces --if-present",
+    "build:web": "npm run build --workspace=apps/web",
+    "build:api": "npm run build --workspace=apps/api",
+    "build:extension": "npm run compile --workspace=apps/vscode-extension",
+    "test": "npm run test --workspaces --if-present",
+    "test:e2e": "npm run test:e2e --workspace=apps/web",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "db:migrate": "npm run migrate --workspace=apps/api",
+    "clean": "npm run clean --workspaces --if-present && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/bonfire.git"
+  },
+  "keywords": [
+    "code-visualization",
+    "3d",
+    "enterprise",
+    "ai",
+    "claude",
+    "mcp",
+    "analytics"
+  ],
+  "author": "BonFire Team",
+  "license": "MIT"
+}
