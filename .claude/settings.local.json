@@ -22,7 +22,14 @@
       "Bash(vite.config.ts)",
       "Bash(timeout /t 3 /nobreak)",
       "Bash(nul)",
-      "Bash(Repo3DViewer.tsx)"
+      "Bash(Repo3DViewer.tsx)",
+      "Bash(npm run build:*)",
+      "Bash(if [ -f \".env\" ])",
+      "Bash(then echo \"exists\")",
+      "Bash(else echo \"not found\")",
+      "Bash(lsof:*)",
+      "Bash(npm run dev:all:*)",
+      "Bash(if exist nul del /f nul 2)"
     ],
     "deny": [],
     "ask": []

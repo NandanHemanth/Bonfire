@@ -11,8 +11,12 @@ import {
   getAllIntegrations,
   deleteWorkflow,
   deleteIntegration,
-  presetIntegrations
+  presetIntegrations,
+  updateWorkflow,
+  executeWorkflow
 } from '../services/workflow-manager.js';
+import { generateWorkflowFromPrompt } from '../services/gemini-workflow-generator.js';
+import { getDedalusClient } from '../services/dedalus-client.js';
 
 const router = express.Router();
 
@@ -48,6 +52,18 @@ router.get('/workflows/:id', async (req, res, next) => {
   }
 });
 
+router.put('/workflows/:id', async (req, res, next) => {
+  try {
+    const workflow = updateWorkflow(req.params.id, req.body);
+    if (!workflow) {
+      return res.status(404).json({ error: 'Workflow not found' });
+    }
+    res.json(workflow);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.delete('/workflows/:id', async (req, res, next) => {
   try {
     const deleted = deleteWorkflow(req.params.id);
@@ -55,6 +71,15 @@ router.delete('/workflows/:id', async (req, res, next) => {
       return res.status(404).json({ error: 'Workflow not found' });
     }
     res.json({ success: true });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/workflows/:id/execute', async (req, res, next) => {
+  try {
+    const result = await executeWorkflow(req.params.id);
+    res.json(result);
   } catch (error) {
     next(error);
   }
@@ -134,6 +159,67 @@ router.delete('/integrations/:id', async (req, res, next) => {
       return res.status(404).json({ error: 'Integration not found' });
     }
     res.json({ success: true });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// AI Workflow Generation
+router.post('/workflows/generate', async (req, res, next) => {
+  try {
+    const { prompt, model } = req.body;
+    if (!prompt) {
+      return res.status(400).json({ error: 'Prompt is required' });
+    }
+
+    // Check if user wants to use Dedalus (@dedalus mention)
+    const useDedalus = prompt.toLowerCase().includes('@dedalus');
+    const cleanPrompt = prompt.replace(/@dedalus/gi, '').trim();
+
+    let workflow;
+
+    if (useDedalus) {
+      console.log('Using Dedalus AI for workflow generation...');
+      const dedalusClient = getDedalusClient();
+
+      // Get available integrations (could be passed from frontend)
+      const availableIntegrations = [
+        'slack', 'jira', 'email', 'calendar', 'github',
+        'database', 'onedrive', 'teams', 'sharepoint'
+      ];
+
+      workflow = await dedalusClient.generateWorkflowWithTools(
+        cleanPrompt,
+        availableIntegrations
+      );
+
+      // Add metadata to indicate Dedalus was used
+      workflow.generatedBy = 'dedalus';
+      workflow.model = model || 'gpt-4-turbo';
+    } else {
+      console.log('Using Gemini for workflow generation...');
+      workflow = await generateWorkflowFromPrompt(cleanPrompt);
+      workflow.generatedBy = 'gemini';
+    }
+
+    res.json(workflow);
+  } catch (error) {
+    console.error('Error generating workflow:', error);
+    next(error);
+  }
+});
+
+// Test Dedalus connection
+router.get('/integrations/dedalus/test', async (req, res, next) => {
+  try {
+    const dedalusClient = getDedalusClient();
+    const isConnected = await dedalusClient.testConnection();
+
+    res.json({
+      success: isConnected,
+      service: 'Dedalus AI',
+      status: isConnected ? 'connected' : 'disconnected'
+    });
   } catch (error) {
     next(error);
   }

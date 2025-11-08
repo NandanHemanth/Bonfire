@@ -286,6 +286,83 @@ export function deleteIntegration(id: string): boolean {
   return integrations.delete(id);
 }
 
+export function updateWorkflow(id: string, updates: Partial<Workflow>): Workflow | undefined {
+  const workflow = workflows.get(id);
+  if (!workflow) {
+    return undefined;
+  }
+
+  const updated = {
+    ...workflow,
+    ...updates,
+    id: workflow.id, // Preserve ID
+    updatedAt: new Date().toISOString()
+  };
+
+  workflows.set(id, updated);
+  return updated;
+}
+
+export async function executeWorkflow(id: string): Promise<any> {
+  const workflow = workflows.get(id);
+  if (!workflow) {
+    throw new Error('Workflow not found');
+  }
+
+  // Basic workflow execution logic
+  // In a real implementation, this would process nodes in order
+  const results: any[] = [];
+
+  for (const node of workflow.nodes) {
+    try {
+      const result = await executeNode(node, workflow);
+      results.push({
+        nodeId: node.id,
+        success: true,
+        result
+      });
+    } catch (error: any) {
+      results.push({
+        nodeId: node.id,
+        success: false,
+        error: error.message
+      });
+      // Stop execution on error (you could make this configurable)
+      break;
+    }
+  }
+
+  return {
+    workflowId: id,
+    executedAt: new Date().toISOString(),
+    results
+  };
+}
+
+async function executeNode(node: WorkflowNode, workflow: Workflow): Promise<any> {
+  // This is a simplified execution logic
+  // In a real implementation, you'd have specific handlers for each node type
+
+  switch (node.type) {
+    case 'trigger':
+      return { message: 'Workflow triggered' };
+
+    case 'action':
+      return { message: 'Action executed', config: node.config };
+
+    case 'integration':
+      // Find the integration config from workflow
+      const integration = workflow.integrations.find(i => i.id === node.config.integrationId);
+      if (!integration) {
+        throw new Error(`Integration not found: ${node.config.integrationId}`);
+      }
+      return { message: 'Integration called', integration: integration.type };
+
+    default:
+      return { message: 'Node executed', type: node.type };
+  }
+}
+
 function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
