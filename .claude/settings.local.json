@@ -6,7 +6,18 @@
       "Bash(else echo \"Directory does not exist\")",
       "Bash(fi)",
       "Bash(mkdir:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: Initialize BonFire enterprise platform with VS Code fork integration\n\n- Set up monorepo structure with apps (web, api, vscode-extension) and packages\n- Implement 4 MCP servers (Finance, HR, CI/CD, Security) with full functionality\n- Create React web app with 3D visualization support (Three.js + React Three Fiber)\n- Build Express API server with GitHub integration and data analysis endpoints\n- Add VS Code extension scaffold with webview providers and tree views\n- Configure Docker Compose for PostgreSQL, Redis, and app services\n- Create comprehensive documentation (API, MCP, Deployment, VS Code Fork guides)\n- Add automated setup scripts for development and VS Code fork\n- Include shared TypeScript types and utility functions\n- Implement complete development workflow with build scripts\n\nThis provides a foundation for:\n- 3D repository visualization in web app and VS Code\n- AI-powered data analysis with Claude\n- Cross-functional automation via MCP servers\n- Role-based views for different team members\n- Enterprise deployment with Docker/Kubernetes\n\n🔥 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(npm install)",
+      "Bash(docker-compose up:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill /PID 27164 /F)",
+      "Bash(taskkill:*)"
     ],
     "deny": [],
     "ask": []
