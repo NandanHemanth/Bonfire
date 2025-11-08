@@ -17,7 +17,12 @@
       "Bash(netstat:*)",
       "Bash(findstr:*)",
       "Bash(taskkill /PID 27164 /F)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(src/server.ts)",
+      "Bash(vite.config.ts)",
+      "Bash(timeout /t 3 /nobreak)",
+      "Bash(nul)",
+      "Bash(Repo3DViewer.tsx)"
     ],
     "deny": [],
     "ask": []

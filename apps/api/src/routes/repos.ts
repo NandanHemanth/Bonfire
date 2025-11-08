@@ -1,5 +1,6 @@
 import express from 'express';
 import { parseRepository, analyzeCodeStructure } from '../services/github-parser.js';
+import { generateRepoLegend } from '../services/gemini-analyzer.js';
 
 const router = express.Router();
 
@@ -11,6 +12,24 @@ router.get('/:owner/:repo', async (req, res, next) => {
 
     const repoData = await parseRepository(owner, repo, branch);
     res.json(repoData);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Generate AI-powered legend for repository
+router.get('/:owner/:repo/legend', async (req, res, next) => {
+  try {
+    const { owner, repo } = req.params;
+    const branch = req.query.branch as string || 'main';
+
+    // First get the repository structure
+    const repoData = await parseRepository(owner, repo, branch);
+
+    // Generate legend using Gemini AI
+    const legend = await generateRepoLegend(owner, repo, repoData.structure);
+
+    res.json(legend);
   } catch (error) {
     next(error);
   }
