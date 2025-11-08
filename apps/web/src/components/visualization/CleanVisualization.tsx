@@ -36,6 +36,12 @@ interface DeepAnalysisData {
     type: string;
   }>;
   hierarchy: any[];
+  aiConnections?: Array<{
+    source: string;
+    target: string;
+    type: string;
+    description: string;
+  }>;
 }
 
 interface IntegrationData {
@@ -57,8 +63,16 @@ interface LegendData {
 
 interface HoveredFile {
   path: string;
-  functions: Array<{ name: string; line: number; type: string }>;
-  apis: Array<{ method: string; path: string; line: number }>;
+  functions: Array<{ name: string; line: number; type: string; description?: string; purpose?: string }>;
+  apis: Array<{ method: string; path: string; line: number; purpose?: string }>;
+  position: { x: number; y: number };
+}
+
+interface HoveredConnection {
+  source: string;
+  target: string;
+  type: string;
+  description?: string;
   position: { x: number; y: number };
 }
 
@@ -69,12 +83,14 @@ export default function CleanVisualization({ owner, repo }: CleanVisualizationPr
   const mouseRef = useRef<THREE.Vector2>(new THREE.Vector2());
   const cameraRef = useRef<THREE.Camera | null>(null);
   const meshMapRef = useRef<Map<THREE.Mesh, any>>(new Map());
+  const connectionMapRef = useRef<Map<THREE.Mesh, any>>(new Map());
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [analysisData, setAnalysisData] = useState<DeepAnalysisData | null>(null);
   const [integrations, setIntegrations] = useState<IntegrationData | null>(null);
   const [hoveredFile, setHoveredFile] = useState<HoveredFile | null>(null);
+  const [hoveredConnection, setHoveredConnection] = useState<HoveredConnection | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const [filters, setFilters] = useState<VisualizationFilters>({
@@ -181,29 +197,55 @@ export default function CleanVisualization({ owner, repo }: CleanVisualizationPr
           }
         });
 
+        connectionMapRef.current.forEach((data, mesh) => {
+          if (mesh.material instanceof THREE.MeshStandardMaterial) {
+            mesh.material.emissive.setHex(data.originalColor);
+            mesh.material.emissiveIntensity = 0.2;
+          }
+        });
+
         if (intersects.length > 0) {
           const mesh = intersects[0].object as THREE.Mesh;
           const fileData = meshMapRef.current.get(mesh);
+          const connectionData = connectionMapRef.current.get(mesh);
 
           if (fileData) {
-            console.log('Hovering over:', fileData.path, 'Functions:', fileData.functions?.length || 0, 'APIs:', fileData.apis?.length || 0);
+            console.log('Hovering over file:', fileData.path, 'Functions:', fileData.functions?.length || 0, 'APIs:', fileData.apis?.length || 0);
             setHoveredFile({
               path: fileData.path,
               functions: fileData.functions || [],
               apis: fileData.apis || [],
               position: { x: event.clientX, y: event.clientY }
             });
+            setHoveredConnection(null);
 
             // Highlight hovered mesh
             if (mesh.material instanceof THREE.MeshStandardMaterial) {
               mesh.material.emissive.setHex(0x3b82f6);
               mesh.material.emissiveIntensity = 0.3;
             }
+          } else if (connectionData) {
+            console.log('Hovering over connection:', connectionData.source, '->', connectionData.target);
+            setHoveredConnection({
+              source: connectionData.source,
+              target: connectionData.target,
+              type: connectionData.type,
+              description: connectionData.description,
+              position: { x: event.clientX, y: event.clientY }
+            });
+            setHoveredFile(null);
+
+            // Highlight hovered connection
+            if (mesh.material instanceof THREE.MeshStandardMaterial) {
+              mesh.material.emissiveIntensity = 0.6;
+            }
           } else {
             setHoveredFile(null);
+            setHoveredConnection(null);
           }
         } else {
           setHoveredFile(null);
+          setHoveredConnection(null);
         }
       }
     };
@@ -309,6 +351,7 @@ export default function CleanVisualization({ owner, repo }: CleanVisualizationPr
     });
     objectsToRemove.forEach(obj => sceneRef.current?.remove(obj));
     meshMapRef.current.clear();
+    connectionMapRef.current.clear();
 
     // Add test cube to verify rendering works
     const testGeo = new THREE.BoxGeometry(2, 2, 2);
@@ -347,7 +390,7 @@ export default function CleanVisualization({ owner, repo }: CleanVisualizationPr
     console.log('✅ Test ORANGE API marker added at (0,2,5)');
 
     // Render visualization
-    renderCleanVisualization(sceneRef.current, analysisData, filters, meshMapRef.current);
+    renderCleanVisualization(sceneRef.current, analysisData, filters, meshMapRef.current, connectionMapRef.current);
 
     console.log('Total scene children after render:', sceneRef.current.children.length);
   }, [filters, analysisData]);
@@ -366,9 +409,12 @@ export default function CleanVisualization({ owner, repo }: CleanVisualizationPr
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-90">
           <div className="text-center">
-            <div className="text-gray-800 text-2xl mb-4 font-semibold">Analyzing Repository...</div>
-            <div className="text-gray-600 text-sm">
-              Parsing functions, connections, APIs, and hierarchy
+            <div className="text-gray-800 text-2xl mb-4 font-semibold">Analyzing Repository with AI...</div>
+            <div className="text-gray-600 text-sm mb-2">
+              Using Gemini AI to understand codebase context
+            </div>
+            <div className="text-gray-500 text-xs">
+              Parsing functions, connections, APIs, and file relationships
             </div>
           </div>
         </div>
@@ -462,11 +508,12 @@ export default function CleanVisualization({ owner, repo }: CleanVisualizationPr
       {/* Hover Tooltip */}
       {hoveredFile && (
         <div
-          className="absolute z-50 bg-white rounded-lg shadow-xl border border-gray-200 p-4 max-w-sm"
+          className="fixed z-50 bg-white rounded-lg shadow-xl border border-gray-200 p-4 max-w-sm"
           style={{
-            left: `${hoveredFile.position.x + 20}px`,
-            top: `${hoveredFile.position.y - 20}px`,
-            pointerEvents: 'none'
+            left: `${mousePosition.x + 20}px`,
+            top: `${mousePosition.y + 20}px`,
+            pointerEvents: 'none',
+            transform: 'translate(0, -50%)'
           }}
         >
           <div className="font-semibold text-gray-800 mb-2 text-sm border-b border-gray-200 pb-2">
@@ -476,10 +523,18 @@ export default function CleanVisualization({ owner, repo }: CleanVisualizationPr
           {hoveredFile.functions.length > 0 && (
             <div className="mb-2">
               <div className="text-xs font-semibold text-green-600 mb-1">Functions:</div>
-              <div className="space-y-1">
+              <div className="space-y-2">
                 {hoveredFile.functions.slice(0, 5).map((func, i) => (
-                  <div key={i} className="text-xs text-gray-600 pl-2">
-                    • {func.name} <span className="text-gray-400">(line {func.line})</span>
+                  <div key={i} className="text-xs pl-2">
+                    <div className="font-medium text-gray-700">
+                      • {func.name} {func.line > 0 && <span className="text-gray-400">(line {func.line})</span>}
+                    </div>
+                    {func.description && (
+                      <div className="text-gray-600 pl-3 mt-0.5 italic">{func.description}</div>
+                    )}
+                    {func.purpose && (
+                      <div className="text-blue-600 pl-3 mt-0.5 text-[10px]">Purpose: {func.purpose}</div>
+                    )}
                   </div>
                 ))}
                 {hoveredFile.functions.length > 5 && (
@@ -494,10 +549,15 @@ export default function CleanVisualization({ owner, repo }: CleanVisualizationPr
           {hoveredFile.apis.length > 0 && (
             <div>
               <div className="text-xs font-semibold text-orange-600 mb-1">APIs:</div>
-              <div className="space-y-1">
+              <div className="space-y-2">
                 {hoveredFile.apis.map((api, i) => (
-                  <div key={i} className="text-xs text-gray-600 pl-2">
-                    • <span className="font-mono">{api.method}</span> {api.path}
+                  <div key={i} className="text-xs pl-2">
+                    <div className="font-medium text-gray-700">
+                      • <span className="font-mono">{api.method}</span> {api.path}
+                    </div>
+                    {api.purpose && (
+                      <div className="text-orange-600 pl-3 mt-0.5 text-[10px]">Purpose: {api.purpose}</div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -510,6 +570,55 @@ export default function CleanVisualization({ owner, repo }: CleanVisualizationPr
         </div>
       )}
 
+      {/* Connection Hover Tooltip */}
+      {hoveredConnection && (
+        <div
+          className="fixed z-50 bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg shadow-xl border-2 border-purple-300 p-4 max-w-md"
+          style={{
+            left: `${mousePosition.x + 20}px`,
+            top: `${mousePosition.y + 20}px`,
+            pointerEvents: 'none',
+            transform: 'translate(0, -50%)'
+          }}
+        >
+          <div className="font-semibold text-purple-900 mb-3 text-sm border-b-2 border-purple-200 pb-2">
+            Connection
+          </div>
+
+          <div className="space-y-2 text-xs">
+            <div className="flex items-start space-x-2">
+              <div className="text-purple-600 font-semibold mt-0.5">From:</div>
+              <div className="flex-1 text-gray-800 font-mono text-[10px] break-all">
+                {hoveredConnection.source.split('/').pop()}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center">
+              <div className="text-purple-500 text-lg">↓</div>
+            </div>
+
+            <div className="flex items-start space-x-2">
+              <div className="text-purple-600 font-semibold mt-0.5">To:</div>
+              <div className="flex-1 text-gray-800 font-mono text-[10px] break-all">
+                {hoveredConnection.target.split('/').pop()}
+              </div>
+            </div>
+
+            <div className="mt-3 pt-2 border-t border-purple-200">
+              <div className="text-purple-600 font-semibold mb-1">Type:</div>
+              <div className="text-gray-700 capitalize">{hoveredConnection.type}</div>
+            </div>
+
+            {hoveredConnection.description && (
+              <div className="mt-3 pt-2 border-t border-purple-200">
+                <div className="text-purple-600 font-semibold mb-1">AI Analysis:</div>
+                <div className="text-gray-700 italic leading-relaxed">{hoveredConnection.description}</div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Legend */}
       <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg border border-gray-200 p-4">
         <div className="text-sm font-semibold text-gray-800 mb-3">Legend</div>
@@ -517,6 +626,10 @@ export default function CleanVisualization({ owner, repo }: CleanVisualizationPr
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 rounded" style={{ backgroundColor: '#0066ff' }}></div>
             <span className="text-gray-700">File Connections (Imports/Exports)</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 rounded" style={{ backgroundColor: '#9333ea' }}></div>
+            <span className="text-gray-700">AI-Discovered Connections</span>
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 rounded" style={{ backgroundColor: '#ff6600' }}></div>
@@ -550,7 +663,8 @@ function renderCleanVisualization(
   scene: THREE.Scene,
   data: DeepAnalysisData,
   filters: VisualizationFilters,
-  meshMap: Map<THREE.Mesh, any>
+  meshMap: Map<THREE.Mesh, any>,
+  connectionMap: Map<THREE.Mesh, any>
 ) {
   console.log('=== renderCleanVisualization called ===');
   const filePositions = new Map<string, THREE.Vector3>();
@@ -571,7 +685,49 @@ function renderCleanVisualization(
     fileDataMap.get(api.file).apis.push(api);
   });
 
+  // Enhance with AI data from hierarchy if available
+  const addAIDataFromHierarchy = (nodes: any[]) => {
+    nodes.forEach(node => {
+      if (node.type === 'file' && (node.aiFunctions || node.aiAPIs)) {
+        if (!fileDataMap.has(node.path)) {
+          fileDataMap.set(node.path, { functions: [], apis: [] });
+        }
+        const fileData = fileDataMap.get(node.path);
+
+        // Merge AI functions (prefer AI data if available)
+        if (node.aiFunctions && node.aiFunctions.length > 0) {
+          fileData.functions = node.aiFunctions.map((aiFunc: any) => ({
+            name: aiFunc.name,
+            description: aiFunc.description,
+            purpose: aiFunc.purpose,
+            line: 0, // AI doesn't provide line numbers
+            type: 'function'
+          }));
+        }
+
+        // Merge AI APIs
+        if (node.aiAPIs && node.aiAPIs.length > 0) {
+          fileData.apis = node.aiAPIs.map((aiApi: any) => ({
+            method: aiApi.method,
+            path: aiApi.endpoint,
+            purpose: aiApi.purpose,
+            line: aiApi.line || 0
+          }));
+        }
+      }
+
+      if (node.children) {
+        addAIDataFromHierarchy(node.children);
+      }
+    });
+  };
+
+  addAIDataFromHierarchy(data.hierarchy);
+
   console.log('Files with data:', fileDataMap.size);
+  console.log('File data map contents:', Array.from(fileDataMap.entries()).map(([path, data]) =>
+    `${path}: ${data.functions.length} functions, ${data.apis.length} APIs`
+  ));
 
   // Render hierarchy as 2D canvas with 3D depth
   if (filters.showDirectories || filters.showFiles) {
@@ -585,7 +741,13 @@ function renderCleanVisualization(
   // Render connections with direction indicators - BRIGHT BLUE
   if (filters.showConnections && data.connections.length > 0) {
     console.log('Rendering connections:', data.connections.length);
-    renderDirectionalConnections(scene, data.connections, filePositions, 0x0066ff); // Bright Blue
+    renderDirectionalConnections(scene, data.connections, filePositions, 0x0066ff, connectionMap); // Bright Blue
+  }
+
+  // Render AI-discovered connections - PURPLE
+  if (filters.showConnections && data.aiConnections && data.aiConnections.length > 0) {
+    console.log('Rendering AI connections:', data.aiConnections.length);
+    renderDirectionalConnections(scene, data.aiConnections, filePositions, 0x9333ea, connectionMap); // Purple
   }
 
   // Render API connections - BRIGHT ORANGE
@@ -687,8 +849,13 @@ function renderDirectionalConnections(
   scene: THREE.Scene,
   connections: any[],
   filePositions: Map<string, THREE.Vector3>,
-  color: number
+  color: number,
+  connectionMap: Map<THREE.Mesh, any>
 ) {
+  console.log(`renderDirectionalConnections: Processing ${connections.length} connections`);
+  console.log('Sample connections:', connections.slice(0, 3));
+  console.log('Available file positions (first 10):', Array.from(filePositions.keys()).slice(0, 10));
+
   // Group connections to detect two-way relationships
   const connectionPairs = new Map<string, { targets: Set<string>; sources: Set<string> }>();
 
@@ -709,6 +876,13 @@ function renderDirectionalConnections(
   connections.forEach(conn => {
     const sourcePos = filePositions.get(conn.source);
     const targetPos = filePositions.get(conn.target);
+
+    if (!sourcePos) {
+      console.log(`  ⚠️ No position for source: "${conn.source}"`);
+    }
+    if (!targetPos) {
+      console.log(`  ⚠️ No position for target: "${conn.target}"`);
+    }
 
     if (sourcePos && targetPos) {
       const connectionKey = [conn.source, conn.target].sort().join('->');
@@ -744,6 +918,15 @@ function renderDirectionalConnections(
       const tube = new THREE.Mesh(tubeGeometry, tubeMaterial);
       scene.add(tube);
       console.log(`  ✅ Added THICK connection tube from ${conn.source} to ${conn.target} (${isTwoWay ? 'two-way' : 'one-way'})`);
+
+      // Store connection metadata for hover
+      connectionMap.set(tube, {
+        source: conn.source,
+        target: conn.target,
+        type: conn.type || 'import',
+        description: conn.description,
+        originalColor: color
+      });
 
       // Add arrow for direction
       if (!isTwoWay) {

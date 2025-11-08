@@ -2,6 +2,7 @@ import express from 'express';
 import { parseRepository, analyzeCodeStructure } from '../services/github-parser.js';
 import { generateRepoLegend } from '../services/gemini-analyzer.js';
 import { analyzeRepository, detectIntegrations } from '../services/code-analyzer.js';
+import { enhanceAnalysisWithAI } from '../services/ai-analyzer.js';
 
 const router = express.Router();
 
@@ -54,8 +55,15 @@ router.get('/:owner/:repo/deep-analysis', async (req, res, next) => {
   try {
     const { owner, repo } = req.params;
     const branch = req.query.branch as string || 'main';
+    const useAI = req.query.ai !== 'false'; // Default to true
 
-    const analysis = await analyzeRepository(owner, repo, branch);
+    let analysis = await analyzeRepository(owner, repo, branch);
+
+    // Enhance with AI if enabled
+    if (useAI) {
+      analysis = await enhanceAnalysisWithAI(owner, repo, analysis);
+    }
+
     res.json(analysis);
   } catch (error) {
     next(error);

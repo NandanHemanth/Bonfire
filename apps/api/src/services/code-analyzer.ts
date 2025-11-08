@@ -3,6 +3,10 @@ import Parser from 'tree-sitter';
 import JavaScript from 'tree-sitter-javascript';
 import TypeScript from 'tree-sitter-typescript';
 import Python from 'tree-sitter-python';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN
@@ -186,7 +190,7 @@ function analyzeFileContent(filePath: string, content: string): {
     const line = lines[i];
     const lineNumber = i + 1;
 
-    // Detect imports
+    // Detect JavaScript/TypeScript imports
     const importMatch = line.match(/import\s+.*from\s+['"]([^'"]+)['"]/);
     if (importMatch) {
       result.imports.push(importMatch[1]);
@@ -206,6 +210,30 @@ function analyzeFileContent(filePath: string, content: string): {
         source: filePath,
         target: requireMatch[1],
         type: 'require',
+        line: lineNumber
+      });
+    }
+
+    // Detect Python imports: from X import Y
+    const pythonFromImport = line.match(/from\s+([a-zA-Z0-9_.]+)\s+import/);
+    if (pythonFromImport) {
+      result.imports.push(pythonFromImport[1]);
+      result.connections.push({
+        source: filePath,
+        target: pythonFromImport[1],
+        type: 'import',
+        line: lineNumber
+      });
+    }
+
+    // Detect Python imports: import X, import X as Y
+    const pythonImport = line.match(/^import\s+([a-zA-Z0-9_.]+)/);
+    if (pythonImport && !line.includes('from')) {
+      result.imports.push(pythonImport[1]);
+      result.connections.push({
+        source: filePath,
+        target: pythonImport[1],
+        type: 'import',
         line: lineNumber
       });
     }
@@ -258,13 +286,17 @@ function analyzeFileContent(filePath: string, content: string): {
 }
 
 function buildConnectionGraph(result: CodeAnalysisResult): void {
-  // Build import resolution map
+  // Build import resolution map - map all files in the repo
   const fileMap = new Map<string, string>();
+  const allFilePaths = new Set<string>();
 
   result.hierarchy.forEach(node => {
     if (node.type === 'file') {
+      allFilePaths.add(node.path);
       const baseName = node.path.split('/').pop()?.replace(/\.\w+$/, '') || '';
       fileMap.set(baseName, node.path);
+      // Also add the full path
+      fileMap.set(node.path, node.path);
     }
   });
 
@@ -285,6 +317,13 @@ function buildConnectionGraph(result: CodeAnalysisResult): void {
         conn.target = fileMap.get(conn.target)!;
       }
     }
+  });
+
+  // Filter out external library imports - only keep connections where both source and target are in the repo
+  result.connections = result.connections.filter(conn => {
+    const sourceExists = allFilePaths.has(conn.source);
+    const targetExists = allFilePaths.has(conn.target);
+    return sourceExists && targetExists;
   });
 }
 
