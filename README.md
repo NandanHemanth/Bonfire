@@ -1,6 +1,8 @@
 # 🔥 BonFire: Enterprise Code & Data Intelligence Platform
 
-> Transform how enterprise teams understand code, data, and cross-functional workflows through 3D visualization and AI-powered automation.
+> **Transforming Enterprise Chaos into Visual Intelligence!**
+
+Transform how enterprise teams understand code, data, and cross-functional workflows through 3D visualization and AI-powered automation.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)

@@ -66,7 +66,8 @@ export default function DeveloperView() {
           {/* Centered Card */}
           <div className="card">
             <div className="text-center mb-6">
-              <h1 className="text-4xl font-bold mb-2">🔥 BonFire</h1>
+              <h1 className="text-6xl font-bold mb-3">🔥 BonFire</h1>
+              <p className="text-orange-400 text-2xl font-semibold mb-2">Transforming Enterprise Chaos into Visual Intelligence!</p>
               <p className="text-gray-300 text-lg">3D Repository Visualization</p>
             </div>
 
