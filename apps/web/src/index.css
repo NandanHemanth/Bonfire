@@ -3,45 +3,58 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-gray-900 text-gray-100 font-sans antialiased;
+  html, body, #root {
+    @apply text-gray-100 font-sans antialiased;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
   }
 }
 
 @layer components {
+  /* Modern Glassmorphism Button with Glow */
   .btn-primary {
-    @apply px-4 py-2 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold transition-colors;
+    @apply px-6 py-3 bg-orange-500 hover:bg-orange-600 rounded-xl font-semibold transition-all shadow-lg shadow-orange-500/50 hover:shadow-orange-600/60 hover:scale-105;
   }
 
+  /* Glass Effect Secondary Button */
   .btn-secondary {
-    @apply px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition-colors;
+    @apply px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 backdrop-blur-sm rounded-xl font-semibold transition-all border border-white border-opacity-20;
   }
 
+  /* Modern Glassmorphism Card */
   .card {
-    @apply bg-gray-800 rounded-lg p-6 shadow-lg;
+    @apply bg-black bg-opacity-40 backdrop-blur-xl border border-white border-opacity-10 rounded-2xl p-6 shadow-2xl;
   }
 }
 
-/* Custom scrollbar */
+/* Modern Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4b5563;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  background: rgba(255, 255, 255, 0.3);
 }
 
-/* 3D Canvas styling */
+/* 3D Canvas styling - Keep white background */
 canvas {
   outline: none;
+}
+
+/* White canvas container for visualization and workflows */
+.white-canvas-container {
+  @apply bg-white rounded-2xl shadow-2xl;
 }

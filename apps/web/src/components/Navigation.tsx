@@ -16,23 +16,32 @@ export default function Navigation({ userRole, onRoleChange }: NavigationProps) 
   ];
 
   return (
-    <nav className="bg-gray-800 border-b border-gray-700">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+    <nav className="bg-black bg-opacity-40 backdrop-blur-lg border-b border-white border-opacity-10 z-50">
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between h-14">
           <div className="flex items-center space-x-8">
-            <Link to="/" className="flex items-center space-x-2">
-              <span className="text-2xl">🔥</span>
-              <span className="text-xl font-bold text-white">BonFire</span>
+            <Link to="/" className="flex items-center space-x-2 group">
+              <span className="text-2xl group-hover:scale-110 transition-transform">🔥</span>
+              <span className="text-xl font-bold text-white tracking-tight">BonFire</span>
             </Link>
 
-            <div className="hidden md:flex space-x-4">
-              <Link to="/developer" className="text-gray-300 hover:text-white px-3 py-2 rounded-md">
+            <div className="hidden md:flex space-x-2">
+              <Link 
+                to="/developer" 
+                className="text-gray-300 hover:text-white hover:bg-white hover:bg-opacity-10 px-4 py-2 rounded-lg transition-all"
+              >
                 Visualize
               </Link>
-              <Link to="/workflows" className="text-gray-300 hover:text-white px-3 py-2 rounded-md">
+              <Link 
+                to="/workflows" 
+                className="text-gray-300 hover:text-white hover:bg-white hover:bg-opacity-10 px-4 py-2 rounded-lg transition-all"
+              >
                 Workflows
               </Link>
-              <Link to="/data-analysis" className="text-gray-300 hover:text-white px-3 py-2 rounded-md">
+              <Link 
+                to="/data-analysis" 
+                className="text-gray-300 hover:text-white hover:bg-white hover:bg-opacity-10 px-4 py-2 rounded-lg transition-all"
+              >
                 Data Analysis
               </Link>
             </div>
@@ -44,10 +53,10 @@ export default function Navigation({ userRole, onRoleChange }: NavigationProps) 
               <button
                 key={role.id}
                 onClick={() => onRoleChange(role.id)}
-                className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
                   userRole === role.id
-                    ? 'bg-orange-600 text-white'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/50'
+                    : 'bg-white bg-opacity-10 text-gray-300 hover:bg-opacity-20 backdrop-blur-sm'
                 }`}
               >
                 {role.icon} {role.label}

@@ -12,9 +12,7 @@ export default function DeveloperView() {
   const handleVisualize = () => {
     if (!repoUrl) return;
 
-    // Parse owner/repo from URL or direct input
     let owner, repo;
-
     const urlMatch = repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
     if (urlMatch) {
       [, owner, repo] = urlMatch;
@@ -28,9 +26,7 @@ export default function DeveloperView() {
       }
     }
 
-    // Remove .git suffix if present
     repo = repo.replace(/\.git$/, '');
-
     setRepoInfo({ owner, repo });
     setVisualizing(true);
   };
@@ -41,217 +37,139 @@ export default function DeveloperView() {
     setVisualizing(true);
   };
 
-  const getRoleConfig = (role: Role) => {
-    switch (role) {
-      case 'developer':
-        return {
-          icon: '💻',
-          title: 'Developer View',
-          description: 'Code structure, functions, and API connections',
-          features: [
-            'Interactive 3D repository visualization',
-            'Real-time sync with latest changes',
-            'Color-coded files (🟢 new, 🔴 deleted, 🟠 modified, 🔵 unchanged)',
-            'Gemini AI-powered code analysis',
-            'File connections & API endpoint mapping',
-            'Hover to see functions and API calls',
-            'Click files to open in VSCode',
-          ]
-        };
-      case 'finance':
-        return {
-          icon: '💰',
-          title: 'Finance View',
-          description: 'Budget allocation and development costs',
-          features: [
-            'Budget allocation pie chart (top left)',
-            'Files colored by development cost',
-            'Development & maintenance cost per file',
-            'Resource hours estimation',
-            'Project budget breakdown',
-            'Cost tracking across codebase',
-            '🔴 Red = Expensive, 🟠 Orange = Moderate, 🟢 Green = Low cost',
-          ]
-        };
-      case 'hr':
-        return {
-          icon: '👥',
-          title: 'HR View',
-          description: 'Team collaboration and contributors',
-          features: [
-            'GitHub contributors per file',
-            'Team member roles and assignments',
-            'Files colored by collaboration level',
-            'Contributor statistics',
-            'Claude as SCRUM Master',
-            '🟢 Green = Highly collaborative (3+ contributors)',
-            '⚫ Gray = No contributors, 🔵 Blue = 1, 🟠 Orange = 2',
-          ]
-        };
-      case 'pm':
-        return {
-          icon: '📊',
-          title: 'Project Manager View',
-          description: 'Issues, pull requests, and sprint progress',
-          features: [
-            'SCRUM sprint chart (top right)',
-            'Issues impact on files',
-            'Pull requests tracking',
-            'Sprint burndown visualization',
-            'Files colored by issue impact',
-            '🔴 Red = High impact, 🟠 Orange = Medium, 🟡 Yellow = Low',
-            'Sprint velocity and progress tracking',
-          ]
-        };
-      case 'devops':
-        return {
-          icon: '🔧',
-          title: 'DevOps View',
-          description: 'Test coverage and CI/CD status',
-          features: [
-            'Multi-LLM test results (Gemini, Claude, XAI)',
-            'Test pass/fail status per file',
-            'Code coverage metrics',
-            'CI/CD pipeline status',
-            'Files colored by test results',
-            '🟢 Green = All passed, 🟠 Orange = Some passed, 🔴 Red = Failed',
-            '⚫ Gray = No tests available',
-          ]
-        };
-    }
+  const getRoleIcon = (role: Role) => {
+    const icons = {
+      developer: '💻',
+      finance: '💰',
+      hr: '👥',
+      pm: '📊',
+      devops: '🔧'
+    };
+    return icons[role];
   };
 
-  const roleConfig = getRoleConfig(selectedRole);
-
   return (
-    <div className="p-8 h-screen flex flex-col">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">{roleConfig.icon} {roleConfig.title}</h1>
-        <p className="text-gray-400">{roleConfig.description}</p>
-      </div>
-
+    <div className="h-full flex items-center justify-center p-6">
       {!visualizing ? (
-        <>
-          <div className="card max-w-2xl">
-            <h2 className="text-xl font-semibold mb-4">Repository Visualization</h2>
+        <div className="w-full max-w-4xl">
+          {/* Centered Card */}
+          <div className="card">
+            <div className="text-center mb-6">
+              <h1 className="text-4xl font-bold mb-2">🔥 BonFire</h1>
+              <p className="text-gray-300 text-lg">3D Repository Visualization</p>
+            </div>
 
-            <div className="space-y-4">
-              {/* Role Selector */}
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Select Your Role
-                </label>
-                <div className="grid grid-cols-5 gap-2">
-                  {(['developer', 'finance', 'hr', 'pm', 'devops'] as Role[]).map((role) => {
-                    const config = getRoleConfig(role);
-                    return (
-                      <button
-                        key={role}
-                        onClick={() => setSelectedRole(role)}
-                        className={`px-4 py-3 rounded-lg border-2 transition ${
-                          selectedRole === role
-                            ? 'border-orange-500 bg-orange-500 bg-opacity-20 text-white'
-                            : 'border-gray-600 bg-gray-700 text-gray-300 hover:border-gray-500'
-                        }`}
-                      >
-                        <div className="text-2xl mb-1">{config.icon}</div>
-                        <div className="text-xs font-semibold">{role.toUpperCase()}</div>
-                      </button>
-                    );
-                  })}
-                </div>
+            {/* Role Selector */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-300 mb-3 text-center">
+                Select Your Role
+              </label>
+              <div className="flex justify-center gap-3">
+                {(['developer', 'finance', 'hr', 'pm', 'devops'] as Role[]).map((role) => (
+                  <button
+                    key={role}
+                    onClick={() => setSelectedRole(role)}
+                    className={`px-4 py-3 rounded-xl border-2 transition-all ${
+                      selectedRole === role
+                        ? 'border-orange-500 bg-orange-500 bg-opacity-20 text-white shadow-lg shadow-orange-500/50 scale-105'
+                        : 'border-white border-opacity-20 bg-white bg-opacity-10 backdrop-blur-sm text-gray-300 hover:border-opacity-40 hover:bg-opacity-20'
+                    }`}
+                  >
+                    <div className="text-2xl mb-1">{getRoleIcon(role)}</div>
+                    <div className="text-xs font-semibold uppercase">{role}</div>
+                  </button>
+                ))}
               </div>
+            </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  GitHub Repository URL or owner/repo
-                </label>
-                <input
-                  type="text"
-                  value={repoUrl}
-                  onChange={(e) => setRepoUrl(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleVisualize()}
-                  placeholder="https://github.com/facebook/react or facebook/react"
-                  className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-orange-500"
-                />
-              </div>
+            {/* Input Field */}
+            <div className="mb-6">
+              <input
+                type="text"
+                value={repoUrl}
+                onChange={(e) => setRepoUrl(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleVisualize()}
+                placeholder="github.com/facebook/react or facebook/react"
+                className="w-full px-6 py-4 bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 rounded-xl text-white text-center placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:bg-opacity-20 transition-all text-lg"
+              />
+            </div>
 
+            {/* Visualize Button */}
+            <button
+              onClick={handleVisualize}
+              disabled={!repoUrl}
+              className="w-full btn-primary text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              🔥 Visualize Repository
+            </button>
+
+            {/* Quick Access */}
+            <div className="mt-6 grid grid-cols-3 gap-3">
               <button
-                onClick={handleVisualize}
-                disabled={!repoUrl}
-                className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => handleQuickVisualize('facebook', 'react')}
+                className="card cursor-pointer hover:border-orange-500 hover:shadow-orange-500/50 transition-all hover:scale-105 p-4"
               >
-                🔥 Visualize Repository
+                <div className="text-orange-400 font-semibold mb-1">🎯 Popular</div>
+                <div className="text-sm text-gray-300">facebook/react</div>
+              </button>
+              <button
+                onClick={() => handleQuickVisualize('microsoft', 'vscode')}
+                className="card cursor-pointer hover:border-blue-500 hover:shadow-blue-500/50 transition-all hover:scale-105 p-4"
+              >
+                <div className="text-blue-400 font-semibold mb-1">⭐ Trending</div>
+                <div className="text-sm text-gray-300">microsoft/vscode</div>
+              </button>
+              <button
+                onClick={() => handleQuickVisualize('vercel', 'next.js')}
+                className="card cursor-pointer hover:border-green-500 hover:shadow-green-500/50 transition-all hover:scale-105 p-4"
+              >
+                <div className="text-green-400 font-semibold mb-1">📚 Framework</div>
+                <div className="text-sm text-gray-300">vercel/next.js</div>
               </button>
             </div>
-
-            <div className="mt-8 p-6 bg-gray-700 rounded-lg">
-              <h3 className="font-semibold mb-4">{roleConfig.title} Features:</h3>
-              <ul className="space-y-2 text-sm text-gray-300">
-                {roleConfig.features.map((feature, idx) => (
-                  <li key={idx}>✓ {feature}</li>
-                ))}
-              </ul>
-            </div>
           </div>
-
-          <div className="mt-8 grid grid-cols-3 gap-4">
-            <div className="card cursor-pointer hover:border-orange-500" onClick={() => handleQuickVisualize('facebook', 'react')}>
-              <h3 className="font-semibold text-orange-400 mb-2">🎯 Popular</h3>
-              <p className="text-sm text-gray-300">facebook/react</p>
-            </div>
-            <div className="card cursor-pointer hover:border-blue-500" onClick={() => handleQuickVisualize('microsoft', 'vscode')}>
-              <h3 className="font-semibold text-blue-400 mb-2">⭐ Trending</h3>
-              <p className="text-sm text-gray-300">microsoft/vscode</p>
-            </div>
-            <div className="card cursor-pointer hover:border-green-500" onClick={() => handleQuickVisualize('vercel', 'next.js')}>
-              <h3 className="font-semibold text-green-400 mb-2">📚 Framework</h3>
-              <p className="text-sm text-gray-300">vercel/next.js</p>
-            </div>
-          </div>
-        </>
+        </div>
       ) : (
-        <div className="flex-1 flex flex-col">
-          <div className="mb-4 flex items-center justify-between">
+        <div className="w-full h-full flex flex-col">
+          {/* Header */}
+          <div className="mb-4 flex items-center justify-between px-4">
             <div>
               <h2 className="text-2xl font-bold">
                 {repoInfo?.owner}/{repoInfo?.repo}
               </h2>
               <p className="text-sm text-gray-400 mt-1">
-                {roleConfig.icon} Viewing as: <span className="text-orange-400 font-semibold">{roleConfig.title}</span>
+                {getRoleIcon(selectedRole)} Viewing as: <span className="text-orange-400 font-semibold">{selectedRole}</span>
               </p>
             </div>
             <div className="flex items-center gap-3">
-              {/* Role switcher in visualization view */}
+              {/* Role switcher */}
               <div className="flex items-center gap-2">
-                {(['developer', 'finance', 'hr', 'pm', 'devops'] as Role[]).map((role) => {
-                  const config = getRoleConfig(role);
-                  return (
-                    <button
-                      key={role}
-                      onClick={() => setSelectedRole(role)}
-                      className={`px-3 py-2 rounded-lg border transition text-sm ${
-                        selectedRole === role
-                          ? 'border-orange-500 bg-orange-500 bg-opacity-20 text-white'
-                          : 'border-gray-600 bg-gray-700 text-gray-400 hover:border-gray-500'
-                      }`}
-                      title={config.title}
-                    >
-                      {config.icon}
-                    </button>
-                  );
-                })}
+                {(['developer', 'finance', 'hr', 'pm', 'devops'] as Role[]).map((role) => (
+                  <button
+                    key={role}
+                    onClick={() => setSelectedRole(role)}
+                    className={`px-3 py-2 rounded-lg border transition-all text-sm ${
+                      selectedRole === role
+                        ? 'border-orange-500 bg-orange-500 bg-opacity-20 text-white shadow-lg shadow-orange-500/50'
+                        : 'border-white border-opacity-20 bg-white bg-opacity-10 backdrop-blur-sm text-gray-400 hover:border-opacity-40 hover:bg-opacity-20'
+                    }`}
+                    title={role}
+                  >
+                    {getRoleIcon(role)}
+                  </button>
+                ))}
               </div>
               <button
                 onClick={() => setVisualizing(false)}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition"
+                className="px-4 py-2 bg-white bg-opacity-10 hover:bg-opacity-20 backdrop-blur-sm rounded-lg transition border border-white border-opacity-20"
               >
-                ← Back to Search
+                ← Back
               </button>
             </div>
           </div>
 
-          <div className="flex-1 card p-0 overflow-hidden">
+          {/* Canvas */}
+          <div className="flex-1 white-canvas-container overflow-hidden">
             {repoInfo && <EnhancedRepo3DViewer owner={repoInfo.owner} repo={repoInfo.repo} role={selectedRole} />}
           </div>
         </div>

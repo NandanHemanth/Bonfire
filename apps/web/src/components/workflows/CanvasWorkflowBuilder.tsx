@@ -279,7 +279,7 @@ export default function CanvasWorkflowBuilder() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-900 text-white">
+    <div className="flex h-full text-white overflow-hidden">
       {/* Workflow Sidebar */}
       <WorkflowSidebar
         workflows={workflows}
@@ -291,7 +291,7 @@ export default function CanvasWorkflowBuilder() {
       {/* Main Canvas Area */}
       <div className="flex-1 flex flex-col">
         {/* Top Toolbar */}
-        <div className="bg-gray-800 border-b border-gray-700 px-4 py-3 flex items-center justify-between">
+        <div className="bg-black bg-opacity-40 backdrop-blur-lg border-b border-white border-opacity-10 px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <h1 className="text-xl font-bold flex items-center gap-2">
               <Workflow className="w-6 h-6 text-orange-500" />
@@ -302,7 +302,7 @@ export default function CanvasWorkflowBuilder() {
           <div className="flex items-center gap-2">
             <button
               onClick={saveWorkflow}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded flex items-center gap-2 transition"
+              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-blue-500/50 hover:scale-105"
             >
               <Save className="w-4 h-4" />
               Save
@@ -310,24 +310,24 @@ export default function CanvasWorkflowBuilder() {
             <button
               onClick={runWorkflow}
               disabled={!selectedWorkflow}
-              className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded flex items-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-green-500 hover:bg-green-600 rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-green-500/50 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               <Play className="w-4 h-4" />
               Run
             </button>
             <button
               onClick={deleteNode}
-              className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded flex items-center gap-2 transition"
+              className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-red-500/50 hover:scale-105"
             >
               <Trash2 className="w-4 h-4" />
               Delete Selected
             </button>
             <button
               onClick={() => setShowChat(!showChat)}
-              className={`px-4 py-2 rounded flex items-center gap-2 transition ${
+              className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg ${
                 showChat
-                  ? 'bg-purple-700 hover:bg-purple-800'
-                  : 'bg-purple-600 hover:bg-purple-700'
+                  ? 'bg-purple-600 hover:bg-purple-700 shadow-purple-600/50'
+                  : 'bg-purple-500 hover:bg-purple-600 shadow-purple-500/50 hover:scale-105'
               }`}
             >
               <Sparkles className="w-4 h-4" />
@@ -338,8 +338,8 @@ export default function CanvasWorkflowBuilder() {
 
         {/* Canvas and Chat Container */}
         <div className="flex-1 flex relative">
-          {/* ReactFlow Canvas */}
-          <div ref={reactFlowWrapper} className="flex-1 relative">
+          {/* ReactFlow Canvas - White Background */}
+          <div ref={reactFlowWrapper} className="flex-1 relative white-canvas-container overflow-hidden">
             <ReactFlow
               nodes={nodes}
               edges={edges}
@@ -354,9 +354,9 @@ export default function CanvasWorkflowBuilder() {
               className="bg-white"
             >
               <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="#d1d5db" />
-              <Controls className="bg-gray-800 border border-gray-700" />
+              <Controls className="bg-white bg-opacity-90 backdrop-blur-sm border border-gray-300 rounded-lg shadow-lg" />
               <MiniMap
-                className="bg-gray-800 border border-gray-700"
+                className="bg-white bg-opacity-90 backdrop-blur-sm border border-gray-300 rounded-lg shadow-lg"
                 nodeColor={(node) => {
                   return node.data.color || '#6366f1';
                 }}
@@ -373,16 +373,16 @@ export default function CanvasWorkflowBuilder() {
             {!showNodeLibrary && (
               <button
                 onClick={() => setShowNodeLibrary(true)}
-                className="absolute top-4 left-4 z-10 p-3 bg-gray-800 border border-gray-700 rounded-lg hover:bg-gray-700 transition"
+                className="absolute top-4 left-4 z-10 p-3 bg-white bg-opacity-90 backdrop-blur-sm border border-gray-300 rounded-lg hover:bg-opacity-100 transition shadow-lg"
               >
-                <Plus className="w-5 h-5" />
+                <Plus className="w-5 h-5 text-gray-700" />
               </button>
             )}
           </div>
 
           {/* Gemini Chat Panel */}
           {showChat && (
-            <div className="w-96 border-l border-gray-700">
+            <div className="w-96 border-l border-white border-opacity-10 bg-black bg-opacity-40 backdrop-blur-xl">
               <GeminiChat
                 onClose={() => setShowChat(false)}
                 onWorkflowGenerated={(generatedNodes, generatedEdges) => {
@@ -406,8 +406,8 @@ export default function CanvasWorkflowBuilder() {
 
       {/* Save Workflow Dialog */}
       {showSaveDialog && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-gray-800 rounded-lg p-6 w-[500px] border border-gray-700">
+        <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-black bg-opacity-80 backdrop-blur-xl rounded-2xl p-6 w-[500px] border border-white border-opacity-20 shadow-2xl">
             <h3 className="text-xl font-semibold mb-4 text-white">Save Workflow</h3>
 
             <div className="space-y-4">
@@ -421,7 +421,7 @@ export default function CanvasWorkflowBuilder() {
                   value={workflowName}
                   onChange={(e) => setWorkflowName(e.target.value)}
                   placeholder="e.g., Jira to Slack Notification"
-                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-orange-500"
+                  className="w-full px-3 py-2 bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:bg-opacity-20"
                   autoFocus
                 />
               </div>
@@ -434,7 +434,7 @@ export default function CanvasWorkflowBuilder() {
                 <select
                   value={workflowRole}
                   onChange={(e) => setWorkflowRole(e.target.value)}
-                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-orange-500"
+                  className="w-full px-3 py-2 bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 rounded-lg text-white focus:outline-none focus:border-orange-500 focus:bg-opacity-20"
                 >
                   <option value="developer">Developer</option>
                   <option value="finance">Finance</option>
@@ -457,12 +457,12 @@ export default function CanvasWorkflowBuilder() {
                   onChange={(e) => setWorkflowDescription(e.target.value)}
                   placeholder="Brief description of what this workflow does..."
                   rows={3}
-                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-orange-500"
+                  className="w-full px-3 py-2 bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:bg-opacity-20"
                 />
               </div>
 
               {/* Workflow Stats */}
-              <div className="bg-gray-700 rounded p-3 text-sm">
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-sm border border-white border-opacity-10">
                 <div className="flex justify-between mb-1">
                   <span className="text-gray-400">Nodes:</span>
                   <span className="text-white font-medium">{nodes.length}</span>
@@ -478,13 +478,13 @@ export default function CanvasWorkflowBuilder() {
             <div className="flex justify-end space-x-3 mt-6">
               <button
                 onClick={() => setShowSaveDialog(false)}
-                className="px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded transition"
+                className="px-4 py-2 bg-white bg-opacity-10 hover:bg-opacity-20 backdrop-blur-sm rounded-lg transition border border-white border-opacity-20"
               >
                 Cancel
               </button>
               <button
                 onClick={handleCreateWorkflow}
-                className="px-4 py-2 bg-orange-600 hover:bg-orange-700 rounded transition"
+                className="px-4 py-2 bg-orange-500 hover:bg-orange-600 rounded-lg transition shadow-lg shadow-orange-500/50 hover:scale-105"
               >
                 Save Workflow
               </button>
