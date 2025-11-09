@@ -48,6 +48,17 @@ export default function DeveloperView() {
     return icons[role];
   };
 
+  const getRoleTooltip = (role: Role) => {
+    const tooltips = {
+      developer: 'Code Quality Metrics • Commit Activity • PR Analytics • Bug Tracking • Technical Debt',
+      finance: 'Cost Analysis • Budget Tracking • ROI Metrics • Resource Allocation • Expense Trends',
+      hr: 'Team Performance • Skill Distribution • Workload Balance • Retention Metrics • Growth Tracking',
+      pm: 'Sprint Progress • Velocity Trends • Milestone Tracking • Risk Assessment • Delivery Metrics',
+      devops: 'Deployment Frequency • Build Success Rate • System Health • Performance Metrics • Incident Tracking'
+    };
+    return tooltips[role];
+  };
+
   return (
     <div className="h-full flex items-center justify-center p-6">
       {!visualizing ? (
@@ -66,18 +77,33 @@ export default function DeveloperView() {
               </label>
               <div className="flex justify-center gap-3">
                 {(['developer', 'finance', 'hr', 'pm', 'devops'] as Role[]).map((role) => (
-                  <button
-                    key={role}
-                    onClick={() => setSelectedRole(role)}
-                    className={`px-4 py-3 rounded-xl border-2 transition-all ${
-                      selectedRole === role
-                        ? 'border-orange-500 bg-orange-500 bg-opacity-20 text-white shadow-lg shadow-orange-500/50 scale-105'
-                        : 'border-white border-opacity-20 bg-white bg-opacity-10 backdrop-blur-sm text-gray-300 hover:border-opacity-40 hover:bg-opacity-20'
-                    }`}
-                  >
-                    <div className="text-2xl mb-1">{getRoleIcon(role)}</div>
-                    <div className="text-xs font-semibold uppercase">{role}</div>
-                  </button>
+                  <div key={role} className="relative group">
+                    <button
+                      onClick={() => setSelectedRole(role)}
+                      className={`px-4 py-3 rounded-xl border-2 transition-all ${
+                        selectedRole === role
+                          ? 'border-orange-500 bg-orange-500 bg-opacity-20 text-white shadow-lg shadow-orange-500/50 scale-105'
+                          : 'border-white border-opacity-20 bg-white bg-opacity-10 backdrop-blur-sm text-gray-300 hover:border-opacity-40 hover:bg-opacity-20'
+                      }`}
+                    >
+                      <div className="text-2xl mb-1">{getRoleIcon(role)}</div>
+                      <div className="text-xs font-semibold uppercase">{role}</div>
+                    </button>
+                    
+                    {/* Tooltip */}
+                    <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none">
+                      <div className="bg-black bg-opacity-95 backdrop-blur-xl border border-orange-500 border-opacity-30 rounded-lg px-4 py-3 shadow-2xl shadow-orange-500/20 min-w-[280px]">
+                        <div className="text-xs font-semibold text-orange-400 mb-1.5">
+                          {getRoleIcon(role)} {role.charAt(0).toUpperCase() + role.slice(1)} Dashboard
+                        </div>
+                        <div className="text-xs text-gray-300 leading-relaxed">
+                          {getRoleTooltip(role)}
+                        </div>
+                        {/* Arrow */}
+                        <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black border-t border-l border-orange-500 border-opacity-30 rotate-45"></div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
