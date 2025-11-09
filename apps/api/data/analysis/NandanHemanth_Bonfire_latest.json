@@ -70,7 +70,7 @@
       "functions": [
         {
           "name": "syncRepository",
-          "line": 221,
+          "line": 237,
           "params": []
         }
       ],
@@ -83,9 +83,9 @@
       ],
       "exports": [],
       "apiCalls": [],
-      "linesOfCode": 248,
+      "linesOfCode": 264,
       "language": "TypeScript",
-      "status": "modified"
+      "status": "unchanged"
     },
     {
       "path": "apps/api/src/routes/workflows.ts",
@@ -255,61 +255,63 @@
       "functions": [
         {
           "name": "analyzeRepositoryWithGemini",
-          "line": 64,
+          "line": 65,
           "params": []
         },
         {
           "name": "analyzeFileWithGemini",
-          "line": 181,
+          "line": 191,
           "params": []
         },
         {
           "name": "analyzeFileWithRegex",
-          "line": 242,
+          "line": 252,
           "params": []
         },
         {
           "name": "getChangedFiles",
-          "line": 308,
+          "line": 318,
           "params": []
         },
         {
           "name": "getFileStatus",
-          "line": 344,
+          "line": 354,
           "params": []
         },
         {
           "name": "fetchFileContent",
-          "line": 351,
+          "line": 361,
           "params": []
         },
         {
           "name": "isCodeFile",
-          "line": 374,
-          "params": []
-        },
-        {
-          "name": "detectLanguage",
           "line": 384,
           "params": []
         },
         {
+          "name": "detectLanguage",
+          "line": 394,
+          "params": []
+        },
+        {
           "name": "saveAnalysisJSON",
-          "line": 406,
+          "line": 416,
           "params": []
         },
         {
           "name": "loadLatestAnalysis",
-          "line": 429,
+          "line": 439,
           "params": []
         }
       ],
-      "imports": [],
+      "imports": [
+        "./role-data-generator.js"
+      ],
       "exports": [],
       "apiCalls": [],
-      "linesOfCode": 443,
+      "linesOfCode": 453,
       "language": "TypeScript",
-      "status": "new"
+      "status": "unchanged"
     },
     {
       "path": "apps/api/src/services/gemini-workflow-generator.ts",
@@ -416,6 +418,47 @@
       ],
       "apiCalls": [],
       "linesOfCode": 46,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/services/role-data-generator.ts",
+      "functions": [
+        {
+          "name": "generateFinanceData",
+          "line": 9,
+          "params": []
+        },
+        {
+          "name": "generateHRData",
+          "line": 47,
+          "params": []
+        },
+        {
+          "name": "generatePMData",
+          "line": 137,
+          "params": []
+        },
+        {
+          "name": "generateDummyPRs",
+          "line": 276,
+          "params": []
+        },
+        {
+          "name": "generateDevOpsData",
+          "line": 312,
+          "params": []
+        },
+        {
+          "name": "generateAllRoleData",
+          "line": 406,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 421,
       "language": "TypeScript",
       "status": "unchanged"
     },
@@ -693,6 +736,92 @@
       "status": "unchanged"
     },
     {
+      "path": "apps/web/src/components/charts/FinancePieChart.tsx",
+      "functions": [
+        {
+          "name": "FinancePieChart",
+          "line": 14,
+          "params": []
+        },
+        {
+          "name": "percentage",
+          "line": 22,
+          "params": []
+        },
+        {
+          "name": "angle",
+          "line": 23,
+          "params": []
+        },
+        {
+          "name": "startRad",
+          "line": 30,
+          "params": []
+        },
+        {
+          "name": "endRad",
+          "line": 31,
+          "params": []
+        },
+        {
+          "name": "overallUsage",
+          "line": 62,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "FinancePieChart"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 143,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/charts/ScrumChart.tsx",
+      "functions": [
+        {
+          "name": "ScrumChart",
+          "line": 16,
+          "params": []
+        },
+        {
+          "name": "completionPercentage",
+          "line": 17,
+          "params": []
+        },
+        {
+          "name": "inProgressPercentage",
+          "line": 18,
+          "params": []
+        },
+        {
+          "name": "todoPercentage",
+          "line": 19,
+          "params": []
+        },
+        {
+          "name": "idealProgress",
+          "line": 30,
+          "params": []
+        },
+        {
+          "name": "velocity",
+          "line": 147,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "ScrumChart"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 170,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
       "path": "apps/web/src/components/data/DataAnalyzer.tsx",
       "functions": [
         {
@@ -733,17 +862,22 @@
       "functions": [
         {
           "name": "DeveloperView",
-          "line": 4,
+          "line": 6,
           "params": []
         },
         {
           "name": "handleVisualize",
-          "line": 9,
+          "line": 12,
           "params": []
         },
         {
           "name": "handleQuickVisualize",
-          "line": 35,
+          "line": 38,
+          "params": []
+        },
+        {
+          "name": "getRoleConfig",
+          "line": 44,
           "params": []
         }
       ],
@@ -754,9 +888,9 @@
         "DeveloperView"
       ],
       "apiCalls": [],
-      "linesOfCode": 129,
+      "linesOfCode": 262,
       "language": "TypeScript",
-      "status": "modified"
+      "status": "unchanged"
     },
     {
       "path": "apps/web/src/components/views/FinanceView.tsx",
@@ -994,66 +1128,74 @@
       "functions": [
         {
           "name": "EnhancedRepo3DViewer",
-          "line": 53,
+          "line": 123,
+          "params": []
+        },
+        {
+          "name": "getFileColorByRole",
+          "line": 139,
           "params": []
         },
         {
           "name": "loadAnalysis",
-          "line": 82,
+          "line": 187,
           "params": []
         },
         {
           "name": "handleSync",
-          "line": 101,
+          "line": 206,
           "params": []
         },
         {
           "name": "handleMouseMove",
-          "line": 191,
+          "line": 296,
           "params": []
         },
         {
           "name": "handleClick",
-          "line": 221,
+          "line": 326,
           "params": []
         },
         {
           "name": "animate",
-          "line": 261,
+          "line": 366,
           "params": []
         },
         {
           "name": "handleResize",
-          "line": 269,
+          "line": 374,
           "params": []
         },
         {
           "name": "createEnhancedVisualization",
-          "line": 289,
+          "line": 394,
           "params": []
         },
         {
           "name": "fileAngle",
-          "line": 345,
+          "line": 451,
           "params": []
         },
         {
           "name": "funcAngle",
-          "line": 367,
+          "line": 474,
           "params": []
         },
         {
           "name": "apiAngle",
-          "line": 396,
+          "line": 503,
           "params": []
         },
         {
           "name": "getFileStatusColor",
-          "line": 483,
+          "line": 590,
           "params": []
         }
       ],
-      "imports": [],
+      "imports": [
+        "../charts/FinancePieChart",
+        "../charts/ScrumChart"
+      ],
       "exports": [
         "EnhancedRepo3DViewer"
       ],
@@ -1061,31 +1203,31 @@
         {
           "method": "GET",
           "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/analysis",
-          "line": 85,
+          "line": 190,
           "type": "rest"
         },
         {
           "method": "GET",
           "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/sync",
-          "line": 106,
+          "line": 211,
           "type": "rest"
         },
         {
           "method": "GET",
           "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/sync-status",
-          "line": 118,
+          "line": 223,
           "type": "rest"
         },
         {
           "method": "GET",
           "endpoint": "http://localhost:3001/api/repos/open-in-vscode",
-          "line": 238,
+          "line": 343,
           "type": "rest"
         }
       ],
-      "linesOfCode": 647,
+      "linesOfCode": 859,
       "language": "TypeScript",
-      "status": "new"
+      "status": "unchanged"
     },
     {
       "path": "apps/web/src/components/visualization/Repo3DViewer.tsx",
@@ -1542,9 +1684,9 @@
       "imports": [],
       "exports": [],
       "apiCalls": [],
-      "linesOfCode": 74,
+      "linesOfCode": 174,
       "language": "TypeScript",
-      "status": "new"
+      "status": "unchanged"
     },
     {
       "path": "packages/shared/types/index.ts",
@@ -1689,6 +1831,11 @@
       "type": "import"
     },
     {
+      "source": "apps/api/src/services/gemini-repo-analyzer.ts",
+      "target": "./role-data-generator.js",
+      "type": "import"
+    },
+    {
       "source": "apps/vscode-extension/src/extension.ts",
       "target": "./views/BonFireViewProvider",
       "type": "import"
@@ -1751,6 +1898,16 @@
     {
       "source": "apps/web/src/components/views/DeveloperView.tsx",
       "target": "../visualization/EnhancedRepo3DViewer",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx",
+      "target": "../charts/FinancePieChart",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx",
+      "target": "../charts/ScrumChart",
       "type": "import"
     },
     {
@@ -1851,28 +2008,28 @@
     {
       "method": "GET",
       "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/analysis",
-      "line": 85,
+      "line": 190,
       "type": "rest",
       "file": "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx"
     },
     {
       "method": "GET",
       "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/sync",
-      "line": 106,
+      "line": 211,
       "type": "rest",
       "file": "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx"
     },
     {
       "method": "GET",
       "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/sync-status",
-      "line": 118,
+      "line": 223,
       "type": "rest",
       "file": "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx"
     },
     {
       "method": "GET",
       "endpoint": "http://localhost:3001/api/repos/open-in-vscode",
-      "line": 238,
+      "line": 343,
       "type": "rest",
       "file": "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx"
     },
@@ -1954,16 +2111,3107 @@
       "file": "apps/web/src/components/workflows/WorkflowBuilder.tsx"
     }
   ],
-  "timestamp": "2025-11-09T02:10:01.408Z",
-  "commitSha": "9f9a554f8f6379a4a86b235cdacdfff48c2c3b18",
+  "timestamp": "2025-11-09T04:52:39.422Z",
+  "commitSha": "7238041cfb3016f4d6adb508125b2aff9143e5f5",
   "stats": {
-    "totalFiles": 53,
-    "totalFunctions": 150,
-    "totalConnections": 35,
+    "totalFiles": 56,
+    "totalFunctions": 170,
+    "totalConnections": 38,
     "totalAPIs": 24,
     "languages": {
-      "TypeScript": 51,
+      "TypeScript": 54,
       "JavaScript": 2
     }
+  },
+  "financeData": {
+    "budgetAllocation": [
+      {
+        "projectName": "Frontend Development",
+        "allocated": 50000,
+        "used": 32000,
+        "currency": "USD"
+      },
+      {
+        "projectName": "Backend Development",
+        "allocated": 60000,
+        "used": 45000,
+        "currency": "USD"
+      },
+      {
+        "projectName": "DevOps & Infrastructure",
+        "allocated": 30000,
+        "used": 18000,
+        "currency": "USD"
+      },
+      {
+        "projectName": "Testing & QA",
+        "allocated": 20000,
+        "used": 12000,
+        "currency": "USD"
+      },
+      {
+        "projectName": "Documentation",
+        "allocated": 10000,
+        "used": 7000,
+        "currency": "USD"
+      }
+    ],
+    "fileCosts": {
+      "apps/api/src/middleware/errorHandler.ts": {
+        "developmentCost": 1130.19270942358,
+        "maintenanceCost": 248.51897892637328,
+        "resourceHours": 11.204664714606906
+      },
+      "apps/api/src/middleware/logger.ts": {
+        "developmentCost": 1199.4630190825196,
+        "maintenanceCost": 275.9904932705017,
+        "resourceHours": 14.73902603154939
+      },
+      "apps/api/src/routes/data.ts": {
+        "developmentCost": 1174.5074040840584,
+        "maintenanceCost": 318.96440514656393,
+        "resourceHours": 16.525845620296273
+      },
+      "apps/api/src/routes/mcp.ts": {
+        "developmentCost": 1972.3733401131349,
+        "maintenanceCost": 367.94530238067216,
+        "resourceHours": 17.537833372530436
+      },
+      "apps/api/src/routes/repos.ts": {
+        "developmentCost": 1445.1128728637825,
+        "maintenanceCost": 378.109725098962,
+        "resourceHours": 10.273310639740208
+      },
+      "apps/api/src/routes/workflows.ts": {
+        "developmentCost": 1580.288582263946,
+        "maintenanceCost": 262.13988940993346,
+        "resourceHours": 11.3152599087328
+      },
+      "apps/api/src/server.ts": {
+        "developmentCost": 1922.0528016626326,
+        "maintenanceCost": 250.10656244213152,
+        "resourceHours": 17.630732578434074
+      },
+      "apps/api/src/services/ai-analyzer.ts": {
+        "developmentCost": 3032.806342059426,
+        "maintenanceCost": 663.0576517010544,
+        "resourceHours": 33.025720220288434
+      },
+      "apps/api/src/services/code-analyzer.ts": {
+        "developmentCost": 3484.594867472887,
+        "maintenanceCost": 698.0080436945781,
+        "resourceHours": 36.34015278519639
+      },
+      "apps/api/src/services/data-analyzer.ts": {
+        "developmentCost": 3419.318044742958,
+        "maintenanceCost": 797.3421385103518,
+        "resourceHours": 37.196578010812864
+      },
+      "apps/api/src/services/dedalus-client.ts": {
+        "developmentCost": 3840.4799194759066,
+        "maintenanceCost": 676.7609847083618,
+        "resourceHours": 31.85228896334199
+      },
+      "apps/api/src/services/gemini-analyzer.ts": {
+        "developmentCost": 3205.2072853010945,
+        "maintenanceCost": 777.3686640821264,
+        "resourceHours": 32.20299236428581
+      },
+      "apps/api/src/services/gemini-repo-analyzer.ts": {
+        "developmentCost": 3775.564088439962,
+        "maintenanceCost": 667.59733338001,
+        "resourceHours": 37.06901209883932
+      },
+      "apps/api/src/services/gemini-workflow-generator.ts": {
+        "developmentCost": 3712.332168670675,
+        "maintenanceCost": 631.7942420130915,
+        "resourceHours": 38.1571916408489
+      },
+      "apps/api/src/services/github-parser.ts": {
+        "developmentCost": 3988.7801433221794,
+        "maintenanceCost": 771.2126961751519,
+        "resourceHours": 32.1054781408781
+      },
+      "apps/api/src/services/integration-clients.ts": {
+        "developmentCost": 3588.0711638804733,
+        "maintenanceCost": 723.9840803547526,
+        "resourceHours": 33.733749797925874
+      },
+      "apps/api/src/services/mcp-orchestrator.ts": {
+        "developmentCost": 3484.51599347714,
+        "maintenanceCost": 780.4413740914861,
+        "resourceHours": 36.67470358372397
+      },
+      "apps/api/src/services/pdf-generator.ts": {
+        "developmentCost": 3435.0720808298943,
+        "maintenanceCost": 786.525038955484,
+        "resourceHours": 34.52523225206584
+      },
+      "apps/api/src/services/role-data-generator.ts": {
+        "developmentCost": 3487.8524402077096,
+        "maintenanceCost": 762.3533428605188,
+        "resourceHours": 37.62194924150158
+      },
+      "apps/api/src/services/workflow-manager.ts": {
+        "developmentCost": 3416.371273938338,
+        "maintenanceCost": 610.9392083747049,
+        "resourceHours": 31.76036630537619
+      },
+      "apps/vscode-extension/src/extension.ts": {
+        "developmentCost": 1367.4247847514964,
+        "maintenanceCost": 322.0303281377428,
+        "resourceHours": 14.126673543825722
+      },
+      "apps/vscode-extension/src/views/BonFireViewProvider.ts": {
+        "developmentCost": 1495.6550055452544,
+        "maintenanceCost": 325.19998945731476,
+        "resourceHours": 14.64721736727762
+      },
+      "apps/vscode-extension/src/views/DependencyTreeProvider.ts": {
+        "developmentCost": 1540.2267412094898,
+        "maintenanceCost": 333.92008169279933,
+        "resourceHours": 15.306543889424082
+      },
+      "apps/vscode-extension/src/views/MCPStatusProvider.ts": {
+        "developmentCost": 1496.7259557950088,
+        "maintenanceCost": 204.6586987589456,
+        "resourceHours": 13.003279223295745
+      },
+      "apps/web/postcss.config.js": {
+        "developmentCost": 808.9834957141893,
+        "maintenanceCost": 98.53280107565028,
+        "resourceHours": 6.141462720277039
+      },
+      "apps/web/src/App.tsx": {
+        "developmentCost": 1553.4892889410476,
+        "maintenanceCost": 228.62543492503323,
+        "resourceHours": 11.945439096879753
+      },
+      "apps/web/src/components/Navigation.tsx": {
+        "developmentCost": 1023.8320918134332,
+        "maintenanceCost": 341.37221603914435,
+        "resourceHours": 15.66321031232677
+      },
+      "apps/web/src/components/charts/FinancePieChart.tsx": {
+        "developmentCost": 1946.0562273127152,
+        "maintenanceCost": 334.5976783435861,
+        "resourceHours": 15.604400415915798
+      },
+      "apps/web/src/components/charts/ScrumChart.tsx": {
+        "developmentCost": 1335.9211044425294,
+        "maintenanceCost": 366.9595017284166,
+        "resourceHours": 15.461953932400615
+      },
+      "apps/web/src/components/data/DataAnalyzer.tsx": {
+        "developmentCost": 1874.822557704278,
+        "maintenanceCost": 255.40189918141758,
+        "resourceHours": 12.510863362571884
+      },
+      "apps/web/src/components/views/DevOpsView.tsx": {
+        "developmentCost": 1810.2546677727337,
+        "maintenanceCost": 317.5281071352226,
+        "resourceHours": 17.808854127860215
+      },
+      "apps/web/src/components/views/DeveloperView.tsx": {
+        "developmentCost": 1453.850882899571,
+        "maintenanceCost": 219.18658421232044,
+        "resourceHours": 14.943538988833424
+      },
+      "apps/web/src/components/views/FinanceView.tsx": {
+        "developmentCost": 1170.4814795637826,
+        "maintenanceCost": 281.45096873946375,
+        "resourceHours": 10.722333572788731
+      },
+      "apps/web/src/components/views/HRView.tsx": {
+        "developmentCost": 1151.4527038555077,
+        "maintenanceCost": 244.1655170348132,
+        "resourceHours": 18.760766973922674
+      },
+      "apps/web/src/components/views/PMView.tsx": {
+        "developmentCost": 1546.6735750597359,
+        "maintenanceCost": 213.84261790790947,
+        "resourceHours": 12.493068750916352
+      },
+      "apps/web/src/components/visualization/CleanVisualization.tsx": {
+        "developmentCost": 1138.986594017912,
+        "maintenanceCost": 316.88462587589527,
+        "resourceHours": 19.322511370414233
+      },
+      "apps/web/src/components/visualization/Enhanced3DViewer.tsx": {
+        "developmentCost": 1304.0577428805905,
+        "maintenanceCost": 367.26568838620267,
+        "resourceHours": 15.106999992610026
+      },
+      "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx": {
+        "developmentCost": 1890.7799351412662,
+        "maintenanceCost": 296.85623918738037,
+        "resourceHours": 11.203114396176497
+      },
+      "apps/web/src/components/visualization/Repo3DViewer.tsx": {
+        "developmentCost": 1384.1985498720935,
+        "maintenanceCost": 271.02988124725164,
+        "resourceHours": 17.824705769274225
+      },
+      "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx": {
+        "developmentCost": 1991.8145459435555,
+        "maintenanceCost": 259.07708389787723,
+        "resourceHours": 12.224556871432103
+      },
+      "apps/web/src/components/workflows/GeminiChat.tsx": {
+        "developmentCost": 1320.7039988868282,
+        "maintenanceCost": 237.11233785570397,
+        "resourceHours": 12.820266735134878
+      },
+      "apps/web/src/components/workflows/NodeConfigPanel.tsx": {
+        "developmentCost": 1684.0141753957646,
+        "maintenanceCost": 370.85972405994914,
+        "resourceHours": 16.38891677442193
+      },
+      "apps/web/src/components/workflows/NodeLibrary.tsx": {
+        "developmentCost": 1866.3153224549387,
+        "maintenanceCost": 279.69269978684076,
+        "resourceHours": 17.18774791337136
+      },
+      "apps/web/src/components/workflows/WorkflowBuilder.tsx": {
+        "developmentCost": 1368.9201982754412,
+        "maintenanceCost": 385.20827399385814,
+        "resourceHours": 17.378982377817803
+      },
+      "apps/web/src/components/workflows/WorkflowNode.tsx": {
+        "developmentCost": 1341.7354852649114,
+        "maintenanceCost": 353.47865074237967,
+        "resourceHours": 10.955528670428333
+      },
+      "apps/web/src/components/workflows/WorkflowSidebar.tsx": {
+        "developmentCost": 1021.2899267042628,
+        "maintenanceCost": 385.87901451746484,
+        "resourceHours": 18.10522336457356
+      },
+      "apps/web/src/main.tsx": {
+        "developmentCost": 1285.1467628165665,
+        "maintenanceCost": 233.23208513037636,
+        "resourceHours": 10.566114690304458
+      },
+      "apps/web/tailwind.config.js": {
+        "developmentCost": 990.8519425004395,
+        "maintenanceCost": 117.19520691476087,
+        "resourceHours": 6.744035982453272
+      },
+      "apps/web/vite.config.ts": {
+        "developmentCost": 1103.139470396076,
+        "maintenanceCost": 182.3180140948447,
+        "resourceHours": 2.883754824773142
+      },
+      "packages/mcp-servers/cicd/src/index.ts": {
+        "developmentCost": 1846.9796741391806,
+        "maintenanceCost": 390.1079473182492,
+        "resourceHours": 15.772896671195298
+      },
+      "packages/mcp-servers/finance/src/index.ts": {
+        "developmentCost": 1478.3386117406203,
+        "maintenanceCost": 261.77240970310834,
+        "resourceHours": 14.551304885654258
+      },
+      "packages/mcp-servers/hr/src/index.ts": {
+        "developmentCost": 1308.8348454860675,
+        "maintenanceCost": 214.8537196742778,
+        "resourceHours": 16.104651392885728
+      },
+      "packages/mcp-servers/security/src/index.ts": {
+        "developmentCost": 1262.2397897764001,
+        "maintenanceCost": 275.7890878622373,
+        "resourceHours": 17.676879049533063
+      },
+      "packages/shared/types/analysis.ts": {
+        "developmentCost": 1627.452495110051,
+        "maintenanceCost": 312.84425150059303,
+        "resourceHours": 18.082295647915196
+      },
+      "packages/shared/types/index.ts": {
+        "developmentCost": 1715.155114209926,
+        "maintenanceCost": 323.347899701493,
+        "resourceHours": 15.826593338860578
+      },
+      "packages/shared/utils/index.ts": {
+        "developmentCost": 1512.851184004332,
+        "maintenanceCost": 208.75411306900736,
+        "resourceHours": 15.689360023738255
+      }
+    }
+  },
+  "hrData": {
+    "fileContributors": {
+      "apps/api/src/middleware/errorHandler.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/middleware/logger.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/routes/data.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/routes/mcp.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/routes/repos.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/routes/workflows.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/server.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/ai-analyzer.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/code-analyzer.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/data-analyzer.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/dedalus-client.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/gemini-analyzer.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/gemini-repo-analyzer.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/gemini-workflow-generator.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/github-parser.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/integration-clients.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/mcp-orchestrator.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/pdf-generator.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/role-data-generator.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/api/src/services/workflow-manager.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/vscode-extension/src/extension.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/vscode-extension/src/views/BonFireViewProvider.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/vscode-extension/src/views/DependencyTreeProvider.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/vscode-extension/src/views/MCPStatusProvider.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/postcss.config.js": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/App.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/Navigation.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/charts/FinancePieChart.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/charts/ScrumChart.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/data/DataAnalyzer.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/views/DevOpsView.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/views/DeveloperView.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/views/FinanceView.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/views/HRView.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/views/PMView.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/visualization/CleanVisualization.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/visualization/Enhanced3DViewer.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/visualization/Repo3DViewer.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/workflows/GeminiChat.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/workflows/NodeConfigPanel.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/workflows/NodeLibrary.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/workflows/WorkflowBuilder.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/workflows/WorkflowNode.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/components/workflows/WorkflowSidebar.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/src/main.tsx": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/tailwind.config.js": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "apps/web/vite.config.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "packages/mcp-servers/cicd/src/index.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "packages/mcp-servers/finance/src/index.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "packages/mcp-servers/hr/src/index.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "packages/mcp-servers/security/src/index.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "packages/shared/types/analysis.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        },
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "packages/shared/types/index.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ],
+      "packages/shared/utils/index.ts": [
+        {
+          "username": "NandanHemanth",
+          "name": "NandanHemanth",
+          "role": "Tech Lead",
+          "contributions": 15,
+          "lastContribution": "2025-10-25T02:29:44.768Z"
+        }
+      ]
+    },
+    "teamMembers": [
+      {
+        "username": "NandanHemanth",
+        "name": "NandanHemanth",
+        "role": "Tech Lead",
+        "contributions": 15,
+        "lastContribution": "2025-10-25T02:29:44.768Z"
+      },
+      {
+        "username": "claude-ai",
+        "name": "Claude",
+        "role": "SCRUM Master",
+        "contributions": 0,
+        "lastContribution": "2025-11-09T04:52:49.909Z"
+      }
+    ]
+  },
+  "pmData": {
+    "issues": [
+      {
+        "id": 1,
+        "title": "Fix authentication bug in login flow",
+        "status": "in_progress",
+        "priority": "high",
+        "impact": "high",
+        "affectedFiles": [],
+        "assignee": "john-doe"
+      },
+      {
+        "id": 2,
+        "title": "Improve API response time",
+        "status": "open",
+        "priority": "medium",
+        "impact": "medium",
+        "affectedFiles": [
+          "apps/api/src/middleware/errorHandler.ts",
+          "apps/api/src/middleware/logger.ts"
+        ],
+        "assignee": "jane-smith"
+      },
+      {
+        "id": 3,
+        "title": "Update dependencies to latest versions",
+        "status": "open",
+        "priority": "low",
+        "impact": "low",
+        "affectedFiles": [
+          "package.json",
+          "package-lock.json"
+        ],
+        "assignee": "bob-wilson"
+      },
+      {
+        "id": 4,
+        "title": "Critical security vulnerability in user validation",
+        "status": "in_progress",
+        "priority": "critical",
+        "impact": "high",
+        "affectedFiles": [],
+        "assignee": "john-doe"
+      },
+      {
+        "id": 5,
+        "title": "Add unit tests for payment module",
+        "status": "closed",
+        "priority": "medium",
+        "impact": "medium",
+        "affectedFiles": [],
+        "assignee": "jane-smith"
+      }
+    ],
+    "pullRequests": [
+      {
+        "id": 101,
+        "title": "Add new user dashboard",
+        "status": "merged",
+        "filesChanged": 12,
+        "additions": 450,
+        "deletions": 120,
+        "author": "john-doe",
+        "createdAt": "2025-11-06T04:52:49.483Z"
+      },
+      {
+        "id": 102,
+        "title": "Fix memory leak in data processing",
+        "status": "open",
+        "filesChanged": 3,
+        "additions": 45,
+        "deletions": 30,
+        "author": "jane-smith",
+        "createdAt": "2025-11-08T04:52:49.483Z"
+      },
+      {
+        "id": 103,
+        "title": "Update API documentation",
+        "status": "merged",
+        "filesChanged": 5,
+        "additions": 200,
+        "deletions": 50,
+        "author": "bob-wilson",
+        "createdAt": "2025-11-04T04:52:49.483Z"
+      }
+    ],
+    "sprints": [
+      {
+        "name": "Sprint 10",
+        "startDate": "2025-10-19T04:52:49.483Z",
+        "endDate": "2025-10-26T04:52:49.483Z",
+        "totalPoints": 90,
+        "completedPoints": 85,
+        "inProgressPoints": 0,
+        "todoPoints": 5
+      },
+      {
+        "name": "Sprint 11",
+        "startDate": "2025-10-26T04:52:49.483Z",
+        "endDate": "2025-11-02T04:52:49.483Z",
+        "totalPoints": 95,
+        "completedPoints": 90,
+        "inProgressPoints": 0,
+        "todoPoints": 5
+      },
+      {
+        "name": "Sprint 12",
+        "startDate": "2025-11-02T04:52:49.483Z",
+        "endDate": "2025-11-16T04:52:49.483Z",
+        "totalPoints": 100,
+        "completedPoints": 45,
+        "inProgressPoints": 30,
+        "todoPoints": 25
+      }
+    ],
+    "currentSprint": {
+      "name": "Sprint 12",
+      "startDate": "2025-11-02T04:52:49.483Z",
+      "endDate": "2025-11-16T04:52:49.483Z",
+      "totalPoints": 100,
+      "completedPoints": 45,
+      "inProgressPoints": 30,
+      "todoPoints": 25
+    }
+  },
+  "devOpsData": {
+    "testResults": {
+      "apps/api/src/middleware/errorHandler.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/middleware/errorHandler.ts",
+          "passed": false,
+          "totalTests": 8,
+          "passedTests": 5,
+          "failedTests": 3,
+          "coverage": 79,
+          "executionTime": 1.247642788086314,
+          "details": "3 test(s) failed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/middleware/errorHandler.ts",
+          "passed": true,
+          "totalTests": 21,
+          "passedTests": 21,
+          "failedTests": 0,
+          "coverage": 94,
+          "executionTime": 0.5182006980131251,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/middleware/errorHandler.ts",
+          "passed": true,
+          "totalTests": 13,
+          "passedTests": 13,
+          "failedTests": 0,
+          "coverage": 83,
+          "executionTime": 1.6528594242821273,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/middleware/logger.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/middleware/logger.ts",
+          "passed": true,
+          "totalTests": 9,
+          "passedTests": 9,
+          "failedTests": 0,
+          "coverage": 87,
+          "executionTime": 1.3124763386586453,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/middleware/logger.ts",
+          "passed": true,
+          "totalTests": 21,
+          "passedTests": 21,
+          "failedTests": 0,
+          "coverage": 93,
+          "executionTime": 0.5375160327770148,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/middleware/logger.ts",
+          "passed": false,
+          "totalTests": 14,
+          "passedTests": 9,
+          "failedTests": 5,
+          "coverage": 70,
+          "executionTime": 2.5247677522620986,
+          "details": "5 test(s) failed"
+        }
+      ],
+      "apps/api/src/routes/data.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/routes/data.ts",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 89,
+          "executionTime": 1.1726458608697565,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/routes/data.ts",
+          "passed": true,
+          "totalTests": 12,
+          "passedTests": 12,
+          "failedTests": 0,
+          "coverage": 79,
+          "executionTime": 0.9797421292793598,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/routes/data.ts",
+          "passed": true,
+          "totalTests": 5,
+          "passedTests": 5,
+          "failedTests": 0,
+          "coverage": 71,
+          "executionTime": 1.2127376956568008,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/routes/mcp.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/routes/mcp.ts",
+          "passed": true,
+          "totalTests": 14,
+          "passedTests": 14,
+          "failedTests": 0,
+          "coverage": 82,
+          "executionTime": 2.1341626098669204,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/routes/mcp.ts",
+          "passed": true,
+          "totalTests": 24,
+          "passedTests": 24,
+          "failedTests": 0,
+          "coverage": 89,
+          "executionTime": 1.1973348420317815,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/routes/mcp.ts",
+          "passed": true,
+          "totalTests": 24,
+          "passedTests": 24,
+          "failedTests": 0,
+          "coverage": 77,
+          "executionTime": 1.4496543292548996,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/routes/repos.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/routes/repos.ts",
+          "passed": true,
+          "totalTests": 10,
+          "passedTests": 10,
+          "failedTests": 0,
+          "coverage": 74,
+          "executionTime": 2.016468449940718,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/routes/repos.ts",
+          "passed": true,
+          "totalTests": 12,
+          "passedTests": 12,
+          "failedTests": 0,
+          "coverage": 77,
+          "executionTime": 1.8856522425768312,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/routes/repos.ts",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 97,
+          "executionTime": 2.2327779686364275,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/routes/workflows.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/routes/workflows.ts",
+          "passed": true,
+          "totalTests": 10,
+          "passedTests": 10,
+          "failedTests": 0,
+          "coverage": 77,
+          "executionTime": 1.9294766822015625,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/routes/workflows.ts",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 88,
+          "executionTime": 0.9176839856329326,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/routes/workflows.ts",
+          "passed": true,
+          "totalTests": 11,
+          "passedTests": 11,
+          "failedTests": 0,
+          "coverage": 92,
+          "executionTime": 1.1886781305878122,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/server.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/server.ts",
+          "passed": true,
+          "totalTests": 24,
+          "passedTests": 24,
+          "failedTests": 0,
+          "coverage": 90,
+          "executionTime": 1.5224370495343882,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/server.ts",
+          "passed": false,
+          "totalTests": 17,
+          "passedTests": 12,
+          "failedTests": 5,
+          "coverage": 96,
+          "executionTime": 2.0568789977141817,
+          "details": "5 test(s) failed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/server.ts",
+          "passed": false,
+          "totalTests": 14,
+          "passedTests": 9,
+          "failedTests": 5,
+          "coverage": 94,
+          "executionTime": 1.8805740425393456,
+          "details": "5 test(s) failed"
+        }
+      ],
+      "apps/api/src/services/ai-analyzer.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/ai-analyzer.ts",
+          "passed": true,
+          "totalTests": 5,
+          "passedTests": 5,
+          "failedTests": 0,
+          "coverage": 78,
+          "executionTime": 0.5881014537692768,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/ai-analyzer.ts",
+          "passed": false,
+          "totalTests": 13,
+          "passedTests": 9,
+          "failedTests": 4,
+          "coverage": 90,
+          "executionTime": 0.7315259100057616,
+          "details": "4 test(s) failed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/ai-analyzer.ts",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 99,
+          "executionTime": 2.32545200823196,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/services/code-analyzer.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/code-analyzer.ts",
+          "passed": true,
+          "totalTests": 10,
+          "passedTests": 10,
+          "failedTests": 0,
+          "coverage": 81,
+          "executionTime": 2.142326112229862,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/code-analyzer.ts",
+          "passed": true,
+          "totalTests": 14,
+          "passedTests": 14,
+          "failedTests": 0,
+          "coverage": 98,
+          "executionTime": 1.7671698111494802,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/code-analyzer.ts",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 96,
+          "executionTime": 2.4293825104480957,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/services/data-analyzer.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/data-analyzer.ts",
+          "passed": true,
+          "totalTests": 11,
+          "passedTests": 11,
+          "failedTests": 0,
+          "coverage": 72,
+          "executionTime": 0.7928184227744244,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/data-analyzer.ts",
+          "passed": false,
+          "totalTests": 24,
+          "passedTests": 18,
+          "failedTests": 6,
+          "coverage": 80,
+          "executionTime": 1.295907481607547,
+          "details": "6 test(s) failed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/data-analyzer.ts",
+          "passed": true,
+          "totalTests": 21,
+          "passedTests": 21,
+          "failedTests": 0,
+          "coverage": 74,
+          "executionTime": 2.9776138164478407,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/services/dedalus-client.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/dedalus-client.ts",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 73,
+          "executionTime": 0.9580234396774769,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/dedalus-client.ts",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 89,
+          "executionTime": 2.1624581546446437,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/dedalus-client.ts",
+          "passed": false,
+          "totalTests": 16,
+          "passedTests": 10,
+          "failedTests": 6,
+          "coverage": 94,
+          "executionTime": 3.2227578286465506,
+          "details": "6 test(s) failed"
+        }
+      ],
+      "apps/api/src/services/gemini-analyzer.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/gemini-analyzer.ts",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 92,
+          "executionTime": 1.6868639623242925,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/gemini-analyzer.ts",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 86,
+          "executionTime": 2.2128169034859453,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/gemini-analyzer.ts",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 67,
+          "executionTime": 1.2484688816976486,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/services/gemini-repo-analyzer.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/gemini-repo-analyzer.ts",
+          "passed": true,
+          "totalTests": 13,
+          "passedTests": 13,
+          "failedTests": 0,
+          "coverage": 92,
+          "executionTime": 0.7136678062731661,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/gemini-repo-analyzer.ts",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 98,
+          "executionTime": 1.0280339305744446,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/gemini-repo-analyzer.ts",
+          "passed": true,
+          "totalTests": 12,
+          "passedTests": 12,
+          "failedTests": 0,
+          "coverage": 68,
+          "executionTime": 0.9346070530284933,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/services/gemini-workflow-generator.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/gemini-workflow-generator.ts",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 76,
+          "executionTime": 1.5390060543716664,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/gemini-workflow-generator.ts",
+          "passed": true,
+          "totalTests": 19,
+          "passedTests": 19,
+          "failedTests": 0,
+          "coverage": 99,
+          "executionTime": 2.038373903006533,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/gemini-workflow-generator.ts",
+          "passed": true,
+          "totalTests": 23,
+          "passedTests": 23,
+          "failedTests": 0,
+          "coverage": 98,
+          "executionTime": 2.8026956961001233,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/services/github-parser.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/github-parser.ts",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 95,
+          "executionTime": 0.9350853715095204,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/github-parser.ts",
+          "passed": true,
+          "totalTests": 24,
+          "passedTests": 24,
+          "failedTests": 0,
+          "coverage": 85,
+          "executionTime": 0.42401190257186955,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/github-parser.ts",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 88,
+          "executionTime": 2.1263518998476223,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/services/integration-clients.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/integration-clients.ts",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 94,
+          "executionTime": 1.671074809902347,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/integration-clients.ts",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 95,
+          "executionTime": 1.6667152968819348,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/integration-clients.ts",
+          "passed": true,
+          "totalTests": 23,
+          "passedTests": 23,
+          "failedTests": 0,
+          "coverage": 95,
+          "executionTime": 2.1279695321701153,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/services/mcp-orchestrator.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/mcp-orchestrator.ts",
+          "passed": true,
+          "totalTests": 11,
+          "passedTests": 11,
+          "failedTests": 0,
+          "coverage": 84,
+          "executionTime": 1.1577230443939688,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/mcp-orchestrator.ts",
+          "passed": true,
+          "totalTests": 9,
+          "passedTests": 9,
+          "failedTests": 0,
+          "coverage": 85,
+          "executionTime": 2.001888448178675,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/mcp-orchestrator.ts",
+          "passed": false,
+          "totalTests": 6,
+          "passedTests": 3,
+          "failedTests": 3,
+          "coverage": 79,
+          "executionTime": 1.8281794898983985,
+          "details": "3 test(s) failed"
+        }
+      ],
+      "apps/api/src/services/pdf-generator.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/pdf-generator.ts",
+          "passed": false,
+          "totalTests": 24,
+          "passedTests": 16,
+          "failedTests": 8,
+          "coverage": 85,
+          "executionTime": 0.8321214516165969,
+          "details": "8 test(s) failed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/pdf-generator.ts",
+          "passed": false,
+          "totalTests": 6,
+          "passedTests": 4,
+          "failedTests": 2,
+          "coverage": 84,
+          "executionTime": 1.6184289491105275,
+          "details": "2 test(s) failed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/pdf-generator.ts",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 81,
+          "executionTime": 1.9108031879274645,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/services/role-data-generator.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/role-data-generator.ts",
+          "passed": true,
+          "totalTests": 24,
+          "passedTests": 24,
+          "failedTests": 0,
+          "coverage": 89,
+          "executionTime": 1.806339497394235,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/role-data-generator.ts",
+          "passed": true,
+          "totalTests": 14,
+          "passedTests": 14,
+          "failedTests": 0,
+          "coverage": 94,
+          "executionTime": 0.3672463769939835,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/role-data-generator.ts",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 70,
+          "executionTime": 1.5466106194574814,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/api/src/services/workflow-manager.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/api/src/services/workflow-manager.ts",
+          "passed": false,
+          "totalTests": 14,
+          "passedTests": 9,
+          "failedTests": 5,
+          "coverage": 99,
+          "executionTime": 2.3552936063032552,
+          "details": "5 test(s) failed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/api/src/services/workflow-manager.ts",
+          "passed": true,
+          "totalTests": 9,
+          "passedTests": 9,
+          "failedTests": 0,
+          "coverage": 96,
+          "executionTime": 0.9644386526154001,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/api/src/services/workflow-manager.ts",
+          "passed": true,
+          "totalTests": 11,
+          "passedTests": 11,
+          "failedTests": 0,
+          "coverage": 83,
+          "executionTime": 2.111647961862528,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/vscode-extension/src/extension.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/vscode-extension/src/extension.ts",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 97,
+          "executionTime": 0.5802338013119499,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/vscode-extension/src/extension.ts",
+          "passed": true,
+          "totalTests": 10,
+          "passedTests": 10,
+          "failedTests": 0,
+          "coverage": 77,
+          "executionTime": 1.058702802375547,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/vscode-extension/src/extension.ts",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 71,
+          "executionTime": 1.9725748896911721,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/vscode-extension/src/views/BonFireViewProvider.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/vscode-extension/src/views/BonFireViewProvider.ts",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 75,
+          "executionTime": 1.2723695187956299,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/vscode-extension/src/views/BonFireViewProvider.ts",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 83,
+          "executionTime": 1.3278163201397308,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/vscode-extension/src/views/BonFireViewProvider.ts",
+          "passed": false,
+          "totalTests": 13,
+          "passedTests": 8,
+          "failedTests": 5,
+          "coverage": 66,
+          "executionTime": 0.522607238285324,
+          "details": "5 test(s) failed"
+        }
+      ],
+      "apps/vscode-extension/src/views/DependencyTreeProvider.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/vscode-extension/src/views/DependencyTreeProvider.ts",
+          "passed": true,
+          "totalTests": 13,
+          "passedTests": 13,
+          "failedTests": 0,
+          "coverage": 87,
+          "executionTime": 2.36167098888742,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/vscode-extension/src/views/DependencyTreeProvider.ts",
+          "passed": true,
+          "totalTests": 13,
+          "passedTests": 13,
+          "failedTests": 0,
+          "coverage": 95,
+          "executionTime": 2.090311893450784,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/vscode-extension/src/views/DependencyTreeProvider.ts",
+          "passed": true,
+          "totalTests": 10,
+          "passedTests": 10,
+          "failedTests": 0,
+          "coverage": 93,
+          "executionTime": 3.0862042956178897,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/vscode-extension/src/views/MCPStatusProvider.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/vscode-extension/src/views/MCPStatusProvider.ts",
+          "passed": true,
+          "totalTests": 19,
+          "passedTests": 19,
+          "failedTests": 0,
+          "coverage": 74,
+          "executionTime": 0.7103022341064174,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/vscode-extension/src/views/MCPStatusProvider.ts",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 78,
+          "executionTime": 1.482978890496329,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/vscode-extension/src/views/MCPStatusProvider.ts",
+          "passed": false,
+          "totalTests": 6,
+          "passedTests": 3,
+          "failedTests": 3,
+          "coverage": 78,
+          "executionTime": 2.5960557865250737,
+          "details": "3 test(s) failed"
+        }
+      ],
+      "apps/web/postcss.config.js": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/postcss.config.js",
+          "passed": true,
+          "totalTests": 16,
+          "passedTests": 16,
+          "failedTests": 0,
+          "coverage": 74,
+          "executionTime": 1.9385273595768289,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/postcss.config.js",
+          "passed": true,
+          "totalTests": 23,
+          "passedTests": 23,
+          "failedTests": 0,
+          "coverage": 92,
+          "executionTime": 0.9252196023849029,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/postcss.config.js",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 78,
+          "executionTime": 1.9467824050839238,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/App.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/App.tsx",
+          "passed": true,
+          "totalTests": 16,
+          "passedTests": 16,
+          "failedTests": 0,
+          "coverage": 89,
+          "executionTime": 1.6905175821975278,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/App.tsx",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 84,
+          "executionTime": 0.9357707148637797,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/App.tsx",
+          "passed": false,
+          "totalTests": 9,
+          "passedTests": 5,
+          "failedTests": 4,
+          "coverage": 87,
+          "executionTime": 2.3209241666840335,
+          "details": "4 test(s) failed"
+        }
+      ],
+      "apps/web/src/components/Navigation.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/Navigation.tsx",
+          "passed": true,
+          "totalTests": 16,
+          "passedTests": 16,
+          "failedTests": 0,
+          "coverage": 78,
+          "executionTime": 1.1074696984964225,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/Navigation.tsx",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 97,
+          "executionTime": 2.130623280145156,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/Navigation.tsx",
+          "passed": true,
+          "totalTests": 24,
+          "passedTests": 24,
+          "failedTests": 0,
+          "coverage": 93,
+          "executionTime": 2.8610323477278867,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/charts/FinancePieChart.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/charts/FinancePieChart.tsx",
+          "passed": true,
+          "totalTests": 16,
+          "passedTests": 16,
+          "failedTests": 0,
+          "coverage": 76,
+          "executionTime": 0.9741386470224036,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/charts/FinancePieChart.tsx",
+          "passed": true,
+          "totalTests": 17,
+          "passedTests": 17,
+          "failedTests": 0,
+          "coverage": 95,
+          "executionTime": 1.081022566222494,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/charts/FinancePieChart.tsx",
+          "passed": true,
+          "totalTests": 21,
+          "passedTests": 21,
+          "failedTests": 0,
+          "coverage": 80,
+          "executionTime": 2.203720286844618,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/charts/ScrumChart.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/charts/ScrumChart.tsx",
+          "passed": false,
+          "totalTests": 16,
+          "passedTests": 11,
+          "failedTests": 5,
+          "coverage": 90,
+          "executionTime": 1.5856918572301564,
+          "details": "5 test(s) failed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/charts/ScrumChart.tsx",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 99,
+          "executionTime": 1.5543780691950906,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/charts/ScrumChart.tsx",
+          "passed": false,
+          "totalTests": 12,
+          "passedTests": 7,
+          "failedTests": 5,
+          "coverage": 94,
+          "executionTime": 2.483501819770221,
+          "details": "5 test(s) failed"
+        }
+      ],
+      "apps/web/src/components/data/DataAnalyzer.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/data/DataAnalyzer.tsx",
+          "passed": true,
+          "totalTests": 12,
+          "passedTests": 12,
+          "failedTests": 0,
+          "coverage": 78,
+          "executionTime": 0.8202414977789254,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/data/DataAnalyzer.tsx",
+          "passed": true,
+          "totalTests": 5,
+          "passedTests": 5,
+          "failedTests": 0,
+          "coverage": 93,
+          "executionTime": 1.2297589762137842,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/data/DataAnalyzer.tsx",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 77,
+          "executionTime": 2.964121673564142,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/views/DevOpsView.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/views/DevOpsView.tsx",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 86,
+          "executionTime": 1.291452987722916,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/views/DevOpsView.tsx",
+          "passed": false,
+          "totalTests": 12,
+          "passedTests": 9,
+          "failedTests": 3,
+          "coverage": 94,
+          "executionTime": 0.587970233270551,
+          "details": "3 test(s) failed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/views/DevOpsView.tsx",
+          "passed": true,
+          "totalTests": 10,
+          "passedTests": 10,
+          "failedTests": 0,
+          "coverage": 95,
+          "executionTime": 0.7401959507207649,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/views/DeveloperView.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/views/DeveloperView.tsx",
+          "passed": true,
+          "totalTests": 16,
+          "passedTests": 16,
+          "failedTests": 0,
+          "coverage": 84,
+          "executionTime": 2.25327850788735,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/views/DeveloperView.tsx",
+          "passed": true,
+          "totalTests": 14,
+          "passedTests": 14,
+          "failedTests": 0,
+          "coverage": 87,
+          "executionTime": 0.9310571877378122,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/views/DeveloperView.tsx",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 92,
+          "executionTime": 2.684120640450937,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/views/FinanceView.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/views/FinanceView.tsx",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 92,
+          "executionTime": 0.6260854873736426,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/views/FinanceView.tsx",
+          "passed": true,
+          "totalTests": 9,
+          "passedTests": 9,
+          "failedTests": 0,
+          "coverage": 86,
+          "executionTime": 1.1612077558426102,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/views/FinanceView.tsx",
+          "passed": true,
+          "totalTests": 12,
+          "passedTests": 12,
+          "failedTests": 0,
+          "coverage": 97,
+          "executionTime": 2.64498759281164,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/views/HRView.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/views/HRView.tsx",
+          "passed": true,
+          "totalTests": 24,
+          "passedTests": 24,
+          "failedTests": 0,
+          "coverage": 84,
+          "executionTime": 2.1166222751529244,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/views/HRView.tsx",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 95,
+          "executionTime": 0.9363706635651201,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/views/HRView.tsx",
+          "passed": false,
+          "totalTests": 22,
+          "passedTests": 14,
+          "failedTests": 8,
+          "coverage": 88,
+          "executionTime": 1.943749505816493,
+          "details": "8 test(s) failed"
+        }
+      ],
+      "apps/web/src/components/views/PMView.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/views/PMView.tsx",
+          "passed": true,
+          "totalTests": 10,
+          "passedTests": 10,
+          "failedTests": 0,
+          "coverage": 88,
+          "executionTime": 0.5392946759823847,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/views/PMView.tsx",
+          "passed": true,
+          "totalTests": 22,
+          "passedTests": 22,
+          "failedTests": 0,
+          "coverage": 92,
+          "executionTime": 0.30530419533976055,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/views/PMView.tsx",
+          "passed": false,
+          "totalTests": 21,
+          "passedTests": 13,
+          "failedTests": 8,
+          "coverage": 74,
+          "executionTime": 2.7799092490205117,
+          "details": "8 test(s) failed"
+        }
+      ],
+      "apps/web/src/components/visualization/CleanVisualization.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/visualization/CleanVisualization.tsx",
+          "passed": true,
+          "totalTests": 23,
+          "passedTests": 23,
+          "failedTests": 0,
+          "coverage": 86,
+          "executionTime": 1.9161307425241736,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/visualization/CleanVisualization.tsx",
+          "passed": true,
+          "totalTests": 16,
+          "passedTests": 16,
+          "failedTests": 0,
+          "coverage": 99,
+          "executionTime": 0.8752110805657838,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/visualization/CleanVisualization.tsx",
+          "passed": false,
+          "totalTests": 19,
+          "passedTests": 12,
+          "failedTests": 7,
+          "coverage": 80,
+          "executionTime": 1.5377032409345597,
+          "details": "7 test(s) failed"
+        }
+      ],
+      "apps/web/src/components/visualization/Enhanced3DViewer.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/visualization/Enhanced3DViewer.tsx",
+          "passed": true,
+          "totalTests": 19,
+          "passedTests": 19,
+          "failedTests": 0,
+          "coverage": 99,
+          "executionTime": 0.8093679974851482,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/visualization/Enhanced3DViewer.tsx",
+          "passed": true,
+          "totalTests": 13,
+          "passedTests": 13,
+          "failedTests": 0,
+          "coverage": 79,
+          "executionTime": 0.9109626410673928,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/visualization/Enhanced3DViewer.tsx",
+          "passed": true,
+          "totalTests": 5,
+          "passedTests": 5,
+          "failedTests": 0,
+          "coverage": 73,
+          "executionTime": 0.6503135691385835,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx",
+          "passed": true,
+          "totalTests": 24,
+          "passedTests": 24,
+          "failedTests": 0,
+          "coverage": 83,
+          "executionTime": 2.025157280424281,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 88,
+          "executionTime": 2.2806148407570976,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/visualization/EnhancedRepo3DViewer.tsx",
+          "passed": true,
+          "totalTests": 7,
+          "passedTests": 7,
+          "failedTests": 0,
+          "coverage": 98,
+          "executionTime": 2.953442336109564,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/visualization/Repo3DViewer.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/visualization/Repo3DViewer.tsx",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 80,
+          "executionTime": 2.3695727465541725,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/visualization/Repo3DViewer.tsx",
+          "passed": false,
+          "totalTests": 6,
+          "passedTests": 4,
+          "failedTests": 2,
+          "coverage": 83,
+          "executionTime": 2.123071410147608,
+          "details": "2 test(s) failed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/visualization/Repo3DViewer.tsx",
+          "passed": true,
+          "totalTests": 8,
+          "passedTests": 8,
+          "failedTests": 0,
+          "coverage": 79,
+          "executionTime": 2.4445278533039683,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx",
+          "passed": true,
+          "totalTests": 7,
+          "passedTests": 7,
+          "failedTests": 0,
+          "coverage": 95,
+          "executionTime": 1.0571831557978926,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx",
+          "passed": true,
+          "totalTests": 23,
+          "passedTests": 23,
+          "failedTests": 0,
+          "coverage": 89,
+          "executionTime": 2.278016508075291,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx",
+          "passed": false,
+          "totalTests": 22,
+          "passedTests": 14,
+          "failedTests": 8,
+          "coverage": 95,
+          "executionTime": 3.3304010481395263,
+          "details": "8 test(s) failed"
+        }
+      ],
+      "apps/web/src/components/workflows/GeminiChat.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/workflows/GeminiChat.tsx",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 83,
+          "executionTime": 0.5536224525919065,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/workflows/GeminiChat.tsx",
+          "passed": true,
+          "totalTests": 13,
+          "passedTests": 13,
+          "failedTests": 0,
+          "coverage": 89,
+          "executionTime": 0.8987364431004814,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/workflows/GeminiChat.tsx",
+          "passed": true,
+          "totalTests": 14,
+          "passedTests": 14,
+          "failedTests": 0,
+          "coverage": 67,
+          "executionTime": 1.4716521143026222,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/workflows/NodeConfigPanel.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/workflows/NodeConfigPanel.tsx",
+          "passed": true,
+          "totalTests": 17,
+          "passedTests": 17,
+          "failedTests": 0,
+          "coverage": 83,
+          "executionTime": 1.1850778417066765,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/workflows/NodeConfigPanel.tsx",
+          "passed": false,
+          "totalTests": 8,
+          "passedTests": 6,
+          "failedTests": 2,
+          "coverage": 77,
+          "executionTime": 2.2516613004255936,
+          "details": "2 test(s) failed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/workflows/NodeConfigPanel.tsx",
+          "passed": true,
+          "totalTests": 12,
+          "passedTests": 12,
+          "failedTests": 0,
+          "coverage": 74,
+          "executionTime": 1.098185246589636,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/workflows/NodeLibrary.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/workflows/NodeLibrary.tsx",
+          "passed": false,
+          "totalTests": 14,
+          "passedTests": 9,
+          "failedTests": 5,
+          "coverage": 74,
+          "executionTime": 2.4041210814634897,
+          "details": "5 test(s) failed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/workflows/NodeLibrary.tsx",
+          "passed": true,
+          "totalTests": 16,
+          "passedTests": 16,
+          "failedTests": 0,
+          "coverage": 96,
+          "executionTime": 1.6678548311536174,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/workflows/NodeLibrary.tsx",
+          "passed": true,
+          "totalTests": 16,
+          "passedTests": 16,
+          "failedTests": 0,
+          "coverage": 92,
+          "executionTime": 2.4581974604503296,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/workflows/WorkflowBuilder.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/workflows/WorkflowBuilder.tsx",
+          "passed": true,
+          "totalTests": 23,
+          "passedTests": 23,
+          "failedTests": 0,
+          "coverage": 70,
+          "executionTime": 1.5965839364131345,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/workflows/WorkflowBuilder.tsx",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 92,
+          "executionTime": 1.7854258307592576,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/workflows/WorkflowBuilder.tsx",
+          "passed": false,
+          "totalTests": 9,
+          "passedTests": 5,
+          "failedTests": 4,
+          "coverage": 92,
+          "executionTime": 2.856054616632092,
+          "details": "4 test(s) failed"
+        }
+      ],
+      "apps/web/src/components/workflows/WorkflowNode.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/workflows/WorkflowNode.tsx",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 71,
+          "executionTime": 2.221248233274762,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/workflows/WorkflowNode.tsx",
+          "passed": false,
+          "totalTests": 8,
+          "passedTests": 6,
+          "failedTests": 2,
+          "coverage": 95,
+          "executionTime": 0.36962679815116467,
+          "details": "2 test(s) failed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/workflows/WorkflowNode.tsx",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 83,
+          "executionTime": 1.4729860264717616,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/components/workflows/WorkflowSidebar.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/components/workflows/WorkflowSidebar.tsx",
+          "passed": true,
+          "totalTests": 19,
+          "passedTests": 19,
+          "failedTests": 0,
+          "coverage": 70,
+          "executionTime": 1.0373420703327607,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/components/workflows/WorkflowSidebar.tsx",
+          "passed": true,
+          "totalTests": 21,
+          "passedTests": 21,
+          "failedTests": 0,
+          "coverage": 95,
+          "executionTime": 1.528353623364693,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/components/workflows/WorkflowSidebar.tsx",
+          "passed": true,
+          "totalTests": 13,
+          "passedTests": 13,
+          "failedTests": 0,
+          "coverage": 82,
+          "executionTime": 3.1179907750145612,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/src/main.tsx": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/src/main.tsx",
+          "passed": false,
+          "totalTests": 11,
+          "passedTests": 7,
+          "failedTests": 4,
+          "coverage": 80,
+          "executionTime": 1.8747154906434464,
+          "details": "4 test(s) failed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/src/main.tsx",
+          "passed": true,
+          "totalTests": 10,
+          "passedTests": 10,
+          "failedTests": 0,
+          "coverage": 90,
+          "executionTime": 1.6260760927244509,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/src/main.tsx",
+          "passed": false,
+          "totalTests": 13,
+          "passedTests": 8,
+          "failedTests": 5,
+          "coverage": 65,
+          "executionTime": 3.1967414165446906,
+          "details": "5 test(s) failed"
+        }
+      ],
+      "apps/web/tailwind.config.js": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/tailwind.config.js",
+          "passed": true,
+          "totalTests": 23,
+          "passedTests": 23,
+          "failedTests": 0,
+          "coverage": 86,
+          "executionTime": 0.9480696459489413,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/tailwind.config.js",
+          "passed": true,
+          "totalTests": 7,
+          "passedTests": 7,
+          "failedTests": 0,
+          "coverage": 85,
+          "executionTime": 1.3372962866920302,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/tailwind.config.js",
+          "passed": true,
+          "totalTests": 18,
+          "passedTests": 18,
+          "failedTests": 0,
+          "coverage": 83,
+          "executionTime": 0.9879170838895093,
+          "details": "All tests passed"
+        }
+      ],
+      "apps/web/vite.config.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "apps/web/vite.config.ts",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 82,
+          "executionTime": 0.6912487482491869,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "apps/web/vite.config.ts",
+          "passed": true,
+          "totalTests": 24,
+          "passedTests": 24,
+          "failedTests": 0,
+          "coverage": 84,
+          "executionTime": 1.5802641938522777,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "apps/web/vite.config.ts",
+          "passed": true,
+          "totalTests": 8,
+          "passedTests": 8,
+          "failedTests": 0,
+          "coverage": 80,
+          "executionTime": 1.1897892272644077,
+          "details": "All tests passed"
+        }
+      ],
+      "packages/mcp-servers/cicd/src/index.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "packages/mcp-servers/cicd/src/index.ts",
+          "passed": false,
+          "totalTests": 22,
+          "passedTests": 15,
+          "failedTests": 7,
+          "coverage": 85,
+          "executionTime": 1.630849827285274,
+          "details": "7 test(s) failed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "packages/mcp-servers/cicd/src/index.ts",
+          "passed": true,
+          "totalTests": 19,
+          "passedTests": 19,
+          "failedTests": 0,
+          "coverage": 99,
+          "executionTime": 1.673776895089382,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "packages/mcp-servers/cicd/src/index.ts",
+          "passed": true,
+          "totalTests": 21,
+          "passedTests": 21,
+          "failedTests": 0,
+          "coverage": 77,
+          "executionTime": 0.9920314834296917,
+          "details": "All tests passed"
+        }
+      ],
+      "packages/mcp-servers/finance/src/index.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "packages/mcp-servers/finance/src/index.ts",
+          "passed": true,
+          "totalTests": 10,
+          "passedTests": 10,
+          "failedTests": 0,
+          "coverage": 92,
+          "executionTime": 1.771735277244192,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "packages/mcp-servers/finance/src/index.ts",
+          "passed": true,
+          "totalTests": 19,
+          "passedTests": 19,
+          "failedTests": 0,
+          "coverage": 95,
+          "executionTime": 1.8502568823479362,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "packages/mcp-servers/finance/src/index.ts",
+          "passed": true,
+          "totalTests": 12,
+          "passedTests": 12,
+          "failedTests": 0,
+          "coverage": 81,
+          "executionTime": 3.0901516587187405,
+          "details": "All tests passed"
+        }
+      ],
+      "packages/mcp-servers/hr/src/index.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "packages/mcp-servers/hr/src/index.ts",
+          "passed": true,
+          "totalTests": 17,
+          "passedTests": 17,
+          "failedTests": 0,
+          "coverage": 81,
+          "executionTime": 0.6597218079483333,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "packages/mcp-servers/hr/src/index.ts",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 91,
+          "executionTime": 1.6998217137189988,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "packages/mcp-servers/hr/src/index.ts",
+          "passed": true,
+          "totalTests": 11,
+          "passedTests": 11,
+          "failedTests": 0,
+          "coverage": 99,
+          "executionTime": 2.68104830197475,
+          "details": "All tests passed"
+        }
+      ],
+      "packages/mcp-servers/security/src/index.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "packages/mcp-servers/security/src/index.ts",
+          "passed": true,
+          "totalTests": 15,
+          "passedTests": 15,
+          "failedTests": 0,
+          "coverage": 83,
+          "executionTime": 1.3543015944017047,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "packages/mcp-servers/security/src/index.ts",
+          "passed": true,
+          "totalTests": 11,
+          "passedTests": 11,
+          "failedTests": 0,
+          "coverage": 75,
+          "executionTime": 0.6559592667873926,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "packages/mcp-servers/security/src/index.ts",
+          "passed": false,
+          "totalTests": 16,
+          "passedTests": 10,
+          "failedTests": 6,
+          "coverage": 88,
+          "executionTime": 2.127840053654075,
+          "details": "6 test(s) failed"
+        }
+      ],
+      "packages/shared/types/analysis.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "packages/shared/types/analysis.ts",
+          "passed": true,
+          "totalTests": 17,
+          "passedTests": 17,
+          "failedTests": 0,
+          "coverage": 99,
+          "executionTime": 0.942631095334745,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "packages/shared/types/analysis.ts",
+          "passed": true,
+          "totalTests": 16,
+          "passedTests": 16,
+          "failedTests": 0,
+          "coverage": 97,
+          "executionTime": 1.9189948837727095,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "packages/shared/types/analysis.ts",
+          "passed": false,
+          "totalTests": 18,
+          "passedTests": 11,
+          "failedTests": 7,
+          "coverage": 96,
+          "executionTime": 3.3411648529413815,
+          "details": "7 test(s) failed"
+        }
+      ],
+      "packages/shared/types/index.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "packages/shared/types/index.ts",
+          "passed": true,
+          "totalTests": 11,
+          "passedTests": 11,
+          "failedTests": 0,
+          "coverage": 71,
+          "executionTime": 2.1709219340127177,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "packages/shared/types/index.ts",
+          "passed": true,
+          "totalTests": 8,
+          "passedTests": 8,
+          "failedTests": 0,
+          "coverage": 75,
+          "executionTime": 2.0608367880928986,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "packages/shared/types/index.ts",
+          "passed": true,
+          "totalTests": 6,
+          "passedTests": 6,
+          "failedTests": 0,
+          "coverage": 69,
+          "executionTime": 3.085879740684982,
+          "details": "All tests passed"
+        }
+      ],
+      "packages/shared/utils/index.ts": [
+        {
+          "llm": "gemini",
+          "filePath": "packages/shared/utils/index.ts",
+          "passed": true,
+          "totalTests": 20,
+          "passedTests": 20,
+          "failedTests": 0,
+          "coverage": 94,
+          "executionTime": 0.9198048589974968,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "claude",
+          "filePath": "packages/shared/utils/index.ts",
+          "passed": true,
+          "totalTests": 7,
+          "passedTests": 7,
+          "failedTests": 0,
+          "coverage": 80,
+          "executionTime": 0.5487888483796934,
+          "details": "All tests passed"
+        },
+        {
+          "llm": "xai",
+          "filePath": "packages/shared/utils/index.ts",
+          "passed": true,
+          "totalTests": 10,
+          "passedTests": 10,
+          "failedTests": 0,
+          "coverage": 90,
+          "executionTime": 1.2718287954387097,
+          "details": "All tests passed"
+        }
+      ]
+    },
+    "cicdStatus": [
+      {
+        "pipeline": "Build & Test",
+        "status": "success",
+        "lastRun": "2025-11-09T02:52:49.369Z"
+      },
+      {
+        "pipeline": "Security Scan",
+        "status": "success",
+        "lastRun": "2025-11-09T01:52:49.369Z"
+      },
+      {
+        "pipeline": "Deploy to Staging",
+        "status": "running",
+        "lastRun": "2025-11-09T04:22:49.369Z"
+      },
+      {
+        "pipeline": "Performance Tests",
+        "status": "failed",
+        "lastRun": "2025-11-09T03:52:49.369Z"
+      }
+    ]
   }
 }
