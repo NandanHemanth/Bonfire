@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import EnhancedRepo3DViewer from '../visualization/EnhancedRepo3DViewer';
 
+type Role = 'developer' | 'finance' | 'hr' | 'pm' | 'devops';
+
 export default function DeveloperView() {
   const [repoUrl, setRepoUrl] = useState('');
   const [visualizing, setVisualizing] = useState(false);
   const [repoInfo, setRepoInfo] = useState<{ owner: string; repo: string } | null>(null);
+  const [selectedRole, setSelectedRole] = useState<Role>('developer');
 
   const handleVisualize = () => {
     if (!repoUrl) return;
@@ -38,11 +41,93 @@ export default function DeveloperView() {
     setVisualizing(true);
   };
 
+  const getRoleConfig = (role: Role) => {
+    switch (role) {
+      case 'developer':
+        return {
+          icon: '💻',
+          title: 'Developer View',
+          description: 'Code structure, functions, and API connections',
+          features: [
+            'Interactive 3D repository visualization',
+            'Real-time sync with latest changes',
+            'Color-coded files (🟢 new, 🔴 deleted, 🟠 modified, 🔵 unchanged)',
+            'Gemini AI-powered code analysis',
+            'File connections & API endpoint mapping',
+            'Hover to see functions and API calls',
+            'Click files to open in VSCode',
+          ]
+        };
+      case 'finance':
+        return {
+          icon: '💰',
+          title: 'Finance View',
+          description: 'Budget allocation and development costs',
+          features: [
+            'Budget allocation pie chart (top left)',
+            'Files colored by development cost',
+            'Development & maintenance cost per file',
+            'Resource hours estimation',
+            'Project budget breakdown',
+            'Cost tracking across codebase',
+            '🔴 Red = Expensive, 🟠 Orange = Moderate, 🟢 Green = Low cost',
+          ]
+        };
+      case 'hr':
+        return {
+          icon: '👥',
+          title: 'HR View',
+          description: 'Team collaboration and contributors',
+          features: [
+            'GitHub contributors per file',
+            'Team member roles and assignments',
+            'Files colored by collaboration level',
+            'Contributor statistics',
+            'Claude as SCRUM Master',
+            '🟢 Green = Highly collaborative (3+ contributors)',
+            '⚫ Gray = No contributors, 🔵 Blue = 1, 🟠 Orange = 2',
+          ]
+        };
+      case 'pm':
+        return {
+          icon: '📊',
+          title: 'Project Manager View',
+          description: 'Issues, pull requests, and sprint progress',
+          features: [
+            'SCRUM sprint chart (top right)',
+            'Issues impact on files',
+            'Pull requests tracking',
+            'Sprint burndown visualization',
+            'Files colored by issue impact',
+            '🔴 Red = High impact, 🟠 Orange = Medium, 🟡 Yellow = Low',
+            'Sprint velocity and progress tracking',
+          ]
+        };
+      case 'devops':
+        return {
+          icon: '🔧',
+          title: 'DevOps View',
+          description: 'Test coverage and CI/CD status',
+          features: [
+            'Multi-LLM test results (Gemini, Claude, XAI)',
+            'Test pass/fail status per file',
+            'Code coverage metrics',
+            'CI/CD pipeline status',
+            'Files colored by test results',
+            '🟢 Green = All passed, 🟠 Orange = Some passed, 🔴 Red = Failed',
+            '⚫ Gray = No tests available',
+          ]
+        };
+    }
+  };
+
+  const roleConfig = getRoleConfig(selectedRole);
+
   return (
     <div className="p-8 h-screen flex flex-col">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">💻 Developer View</h1>
-        <p className="text-gray-400">Visualize any GitHub repository in 3D</p>
+        <h1 className="text-3xl font-bold mb-2">{roleConfig.icon} {roleConfig.title}</h1>
+        <p className="text-gray-400">{roleConfig.description}</p>
       </div>
 
       {!visualizing ? (
@@ -51,6 +136,32 @@ export default function DeveloperView() {
             <h2 className="text-xl font-semibold mb-4">Repository Visualization</h2>
 
             <div className="space-y-4">
+              {/* Role Selector */}
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Select Your Role
+                </label>
+                <div className="grid grid-cols-5 gap-2">
+                  {(['developer', 'finance', 'hr', 'pm', 'devops'] as Role[]).map((role) => {
+                    const config = getRoleConfig(role);
+                    return (
+                      <button
+                        key={role}
+                        onClick={() => setSelectedRole(role)}
+                        className={`px-4 py-3 rounded-lg border-2 transition ${
+                          selectedRole === role
+                            ? 'border-orange-500 bg-orange-500 bg-opacity-20 text-white'
+                            : 'border-gray-600 bg-gray-700 text-gray-300 hover:border-gray-500'
+                        }`}
+                      >
+                        <div className="text-2xl mb-1">{config.icon}</div>
+                        <div className="text-xs font-semibold">{role.toUpperCase()}</div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   GitHub Repository URL or owner/repo
@@ -75,16 +186,11 @@ export default function DeveloperView() {
             </div>
 
             <div className="mt-8 p-6 bg-gray-700 rounded-lg">
-              <h3 className="font-semibold mb-4">Features:</h3>
+              <h3 className="font-semibold mb-4">{roleConfig.title} Features:</h3>
               <ul className="space-y-2 text-sm text-gray-300">
-                <li>✓ Interactive 3D repository visualization</li>
-                <li>✓ Real-time sync with latest changes</li>
-                <li>✓ Color-coded files (🟢 new, 🔴 deleted, 🟠 modified, 🔵 unchanged)</li>
-                <li>✓ Gemini AI-powered code analysis</li>
-                <li>✓ File connections & API endpoint mapping</li>
-                <li>✓ Hover to see functions and API calls</li>
-                <li>✓ Translucent folder visualization</li>
-                <li>✓ Automatic JSON storage of analysis</li>
+                {roleConfig.features.map((feature, idx) => (
+                  <li key={idx}>✓ {feature}</li>
+                ))}
               </ul>
             </div>
           </div>
@@ -107,19 +213,46 @@ export default function DeveloperView() {
       ) : (
         <div className="flex-1 flex flex-col">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-2xl font-bold">
-              {repoInfo?.owner}/{repoInfo?.repo}
-            </h2>
-            <button
-              onClick={() => setVisualizing(false)}
-              className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition"
-            >
-              ← Back to Search
-            </button>
+            <div>
+              <h2 className="text-2xl font-bold">
+                {repoInfo?.owner}/{repoInfo?.repo}
+              </h2>
+              <p className="text-sm text-gray-400 mt-1">
+                {roleConfig.icon} Viewing as: <span className="text-orange-400 font-semibold">{roleConfig.title}</span>
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              {/* Role switcher in visualization view */}
+              <div className="flex items-center gap-2">
+                {(['developer', 'finance', 'hr', 'pm', 'devops'] as Role[]).map((role) => {
+                  const config = getRoleConfig(role);
+                  return (
+                    <button
+                      key={role}
+                      onClick={() => setSelectedRole(role)}
+                      className={`px-3 py-2 rounded-lg border transition text-sm ${
+                        selectedRole === role
+                          ? 'border-orange-500 bg-orange-500 bg-opacity-20 text-white'
+                          : 'border-gray-600 bg-gray-700 text-gray-400 hover:border-gray-500'
+                      }`}
+                      title={config.title}
+                    >
+                      {config.icon}
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                onClick={() => setVisualizing(false)}
+                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition"
+              >
+                ← Back to Search
+              </button>
+            </div>
           </div>
 
           <div className="flex-1 card p-0 overflow-hidden">
-            {repoInfo && <EnhancedRepo3DViewer owner={repoInfo.owner} repo={repoInfo.repo} role="developer" />}
+            {repoInfo && <EnhancedRepo3DViewer owner={repoInfo.owner} repo={repoInfo.repo} role={selectedRole} />}
           </div>
         </div>
       )}

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import FinancePieChart from '../charts/FinancePieChart';
+import ScrumChart from '../charts/ScrumChart';
 
 interface EnhancedRepo3DViewerProps {
   owner: string;
@@ -35,6 +37,23 @@ interface FileConnection {
   type: string;
 }
 
+interface ContributorInfo {
+  username: string;
+  name: string;
+  role: string;
+  contributions: number;
+}
+
+interface TestResult {
+  llm: 'gemini' | 'claude' | 'xai';
+  filePath: string;
+  passed: boolean;
+  totalTests: number;
+  passedTests: number;
+  failedTests: number;
+  coverage: number;
+}
+
 interface RepositoryAnalysis {
   owner: string;
   repo: string;
@@ -47,6 +66,57 @@ interface RepositoryAnalysis {
     totalFunctions: number;
     totalConnections: number;
     totalAPIs: number;
+  };
+  // Role-specific data
+  financeData?: {
+    budgetAllocation: Array<{
+      projectName: string;
+      allocated: number;
+      used: number;
+      currency: string;
+    }>;
+    fileCosts: Record<string, {
+      developmentCost: number;
+      maintenanceCost: number;
+      resourceHours: number;
+    }>;
+  };
+  hrData?: {
+    fileContributors: Record<string, ContributorInfo[]>;
+    teamMembers: ContributorInfo[];
+  };
+  pmData?: {
+    issues: Array<{
+      id: number;
+      title: string;
+      status: string;
+      priority: string;
+      impact: 'low' | 'medium' | 'high';
+      affectedFiles: string[];
+    }>;
+    pullRequests: any[];
+    sprints: Array<{
+      name: string;
+      startDate: string;
+      endDate: string;
+      totalPoints: number;
+      completedPoints: number;
+      inProgressPoints: number;
+      todoPoints: number;
+    }>;
+    currentSprint?: {
+      name: string;
+      startDate: string;
+      endDate: string;
+      totalPoints: number;
+      completedPoints: number;
+      inProgressPoints: number;
+      todoPoints: number;
+    };
+  };
+  devOpsData?: {
+    testResults: Record<string, TestResult[]>;
+    cicdStatus: any[];
   };
 }
 
@@ -65,14 +135,49 @@ export default function EnhancedRepo3DViewer({ owner, repo, role = 'developer' }
   const mouseRef = useRef<THREE.Vector2>(new THREE.Vector2());
   const meshToFileMap = useRef<Map<THREE.Mesh, FileAnalysis>>(new Map());
 
-  // Only show for developer role
-  if (role !== 'developer') {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-gray-400">This view is only available for Developer role</p>
-      </div>
-    );
-  }
+  // Helper function to get file color based on role
+  const getFileColorByRole = (file: FileAnalysis): number => {
+    if (role === 'developer') {
+      // Original color coding by file status
+      return getFileStatusColor(file.status);
+    } else if (role === 'finance' && analysis?.financeData) {
+      // Color by cost - red for expensive, green for cheap
+      const cost = analysis.financeData.fileCosts[file.path];
+      if (!cost) return 0x4a90e2;
+      const totalCost = cost.developmentCost + cost.maintenanceCost;
+      if (totalCost > 3000) return 0xff0000; // Red - expensive
+      if (totalCost > 1500) return 0xffaa00; // Orange - moderate
+      return 0x00ff00; // Green - cheap
+    } else if (role === 'hr' && analysis?.hrData) {
+      // Color by number of contributors
+      const contributors = analysis.hrData.fileContributors[file.path] || [];
+      if (contributors.length === 0) return 0x888888; // Gray - no contributors
+      if (contributors.length === 1) return 0x4a90e2; // Blue - single contributor
+      if (contributors.length === 2) return 0xffaa00; // Orange - two contributors
+      return 0x00ff00; // Green - collaborative (3+)
+    } else if (role === 'pm' && analysis?.pmData) {
+      // Color by issues impact
+      const issues = analysis.pmData.issues.filter(issue =>
+        issue.affectedFiles.includes(file.path)
+      );
+      if (issues.length === 0) return 0x4a90e2; // Blue - no issues
+      const highImpact = issues.some(i => i.impact === 'high');
+      if (highImpact) return 0xff0000; // Red - high impact issues
+      const mediumImpact = issues.some(i => i.impact === 'medium');
+      if (mediumImpact) return 0xffaa00; // Orange - medium impact
+      return 0xffff00; // Yellow - low impact
+    } else if (role === 'devops' && analysis?.devOpsData) {
+      // Color by test results
+      const tests = analysis.devOpsData.testResults[file.path];
+      if (!tests || tests.length === 0) return 0x888888; // Gray - no tests
+      const allPassed = tests.every(t => t.passed);
+      const anyPassed = tests.some(t => t.passed);
+      if (allPassed) return 0x00ff00; // Green - all tests passed
+      if (anyPassed) return 0xffaa00; // Orange - some tests passed
+      return 0xff0000; // Red - all tests failed
+    }
+    return 0x4a90e2; // Default blue
+  };
 
   // Fetch analysis on mount
   useEffect(() => {
@@ -284,7 +389,7 @@ export default function EnhancedRepo3DViewer({ owner, repo, role = 'developer' }
       renderer.dispose();
       document.body.style.cursor = 'default';
     };
-  }, [analysis]);
+  }, [analysis, role]);
 
   const createEnhancedVisualization = (scene: THREE.Scene, data: RepositoryAnalysis) => {
     meshToFileMap.current.clear();
@@ -349,9 +454,9 @@ export default function EnhancedRepo3DViewer({ owner, repo, role = 'developer' }
         const fy = Math.sin(fileAngle) * 1.5;
         const fz = z + Math.sin(fileAngle) * fileRadius;
 
-        // Create file mesh - thin rectangle with color based on status
+        // Create file mesh - thin rectangle with color based on role
         const fileGeometry = new THREE.BoxGeometry(0.4, 0.8, 0.1); // Thin rectangular
-        const fileColor = getFileStatusColor(file.status);
+        const fileColor = getFileColorByRole(file);
         const fileMaterial = new THREE.MeshPhongMaterial({
           color: fileColor,
           emissive: fileColor,
@@ -535,43 +640,121 @@ export default function EnhancedRepo3DViewer({ owner, repo, role = 'developer' }
             <p className="font-bold text-white mb-2">{hoveredFile.path.split('/').pop()}</p>
             <p className="text-gray-400 text-xs mb-2">{hoveredFile.path}</p>
             <div className="space-y-1 text-xs">
-              <p>
-                <span className="text-gray-500">Status:</span>{' '}
-                <span className={`font-semibold ${
-                  hoveredFile.status === 'new' ? 'text-green-400' :
-                  hoveredFile.status === 'deleted' ? 'text-red-400' :
-                  hoveredFile.status === 'modified' ? 'text-orange-400' :
-                  'text-blue-400'
-                }`}>
-                  {hoveredFile.status.toUpperCase()}
-                </span>
-              </p>
-              <p><span className="text-gray-500">Language:</span> {hoveredFile.language}</p>
-              <p><span className="text-gray-500">Functions:</span> {hoveredFile.functions.length}</p>
-              <p><span className="text-gray-500">Lines:</span> {hoveredFile.linesOfCode}</p>
-              <p><span className="text-gray-500">API Calls:</span> {hoveredFile.apiCalls.length}</p>
+              {/* Developer Role - Show code details */}
+              {role === 'developer' && (
+                <>
+                  <p>
+                    <span className="text-gray-500">Status:</span>{' '}
+                    <span className={`font-semibold ${
+                      hoveredFile.status === 'new' ? 'text-green-400' :
+                      hoveredFile.status === 'deleted' ? 'text-red-400' :
+                      hoveredFile.status === 'modified' ? 'text-orange-400' :
+                      'text-blue-400'
+                    }`}>
+                      {hoveredFile.status.toUpperCase()}
+                    </span>
+                  </p>
+                  <p><span className="text-gray-500">Language:</span> {hoveredFile.language}</p>
+                  <p><span className="text-gray-500">Functions:</span> {hoveredFile.functions.length}</p>
+                  <p><span className="text-gray-500">Lines:</span> {hoveredFile.linesOfCode}</p>
+                  <p><span className="text-gray-500">API Calls:</span> {hoveredFile.apiCalls.length}</p>
 
-              {hoveredFile.functions.length > 0 && (
-                <div className="mt-2 pt-2 border-t border-gray-700">
-                  <p className="text-gray-500 mb-1">Functions:</p>
-                  {hoveredFile.functions.slice(0, 3).map((fn, idx) => (
-                    <p key={idx} className="text-gray-300 ml-2">• {fn.name}</p>
-                  ))}
-                  {hoveredFile.functions.length > 3 && (
-                    <p className="text-gray-500 ml-2">... +{hoveredFile.functions.length - 3} more</p>
+                  {hoveredFile.functions.length > 0 && (
+                    <div className="mt-2 pt-2 border-t border-gray-700">
+                      <p className="text-gray-500 mb-1">Functions:</p>
+                      {hoveredFile.functions.slice(0, 3).map((fn, idx) => (
+                        <p key={idx} className="text-gray-300 ml-2">• {fn.name}</p>
+                      ))}
+                      {hoveredFile.functions.length > 3 && (
+                        <p className="text-gray-500 ml-2">... +{hoveredFile.functions.length - 3} more</p>
+                      )}
+                    </div>
                   )}
-                </div>
+                </>
               )}
 
-              {hoveredFile.apiCalls.length > 0 && (
-                <div className="mt-2 pt-2 border-t border-gray-700">
-                  <p className="text-gray-500 mb-1">API Calls:</p>
-                  {hoveredFile.apiCalls.slice(0, 2).map((api, idx) => (
-                    <p key={idx} className="text-gray-300 ml-2 text-xs">
-                      • {api.method} {api.endpoint}
+              {/* Finance Role - Show costs */}
+              {role === 'finance' && analysis?.financeData?.fileCosts[hoveredFile.path] && (
+                <>
+                  <p><span className="text-gray-500">Language:</span> {hoveredFile.language}</p>
+                  <p><span className="text-gray-500">Lines:</span> {hoveredFile.linesOfCode}</p>
+                  <div className="mt-2 pt-2 border-t border-gray-700">
+                    <p className="text-gray-500 mb-1">Financial Data:</p>
+                    <p className="text-gray-300">
+                      Development Cost: <span className="text-green-400">${analysis.financeData.fileCosts[hoveredFile.path].developmentCost.toFixed(0)}</span>
                     </p>
-                  ))}
-                </div>
+                    <p className="text-gray-300">
+                      Maintenance Cost: <span className="text-yellow-400">${analysis.financeData.fileCosts[hoveredFile.path].maintenanceCost.toFixed(0)}</span>
+                    </p>
+                    <p className="text-gray-300">
+                      Resource Hours: <span className="text-blue-400">{analysis.financeData.fileCosts[hoveredFile.path].resourceHours.toFixed(1)}h</span>
+                    </p>
+                  </div>
+                </>
+              )}
+
+              {/* HR Role - Show contributors */}
+              {role === 'hr' && analysis?.hrData?.fileContributors[hoveredFile.path] && (
+                <>
+                  <p><span className="text-gray-500">Language:</span> {hoveredFile.language}</p>
+                  <p><span className="text-gray-500">Lines:</span> {hoveredFile.linesOfCode}</p>
+                  <div className="mt-2 pt-2 border-t border-gray-700">
+                    <p className="text-gray-500 mb-1">Contributors:</p>
+                    {analysis.hrData.fileContributors[hoveredFile.path].slice(0, 3).map((contributor, idx) => (
+                      <p key={idx} className="text-gray-300 ml-2">
+                        • {contributor.name} <span className="text-gray-500">({contributor.role})</span>
+                      </p>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {/* PM Role - Show issues */}
+              {role === 'pm' && analysis?.pmData && (
+                <>
+                  <p><span className="text-gray-500">Language:</span> {hoveredFile.language}</p>
+                  <p><span className="text-gray-500">Lines:</span> {hoveredFile.linesOfCode}</p>
+                  {(() => {
+                    const fileIssues = analysis.pmData.issues.filter(issue =>
+                      issue.affectedFiles.includes(hoveredFile.path)
+                    );
+                    return fileIssues.length > 0 && (
+                      <div className="mt-2 pt-2 border-t border-gray-700">
+                        <p className="text-gray-500 mb-1">Issues ({fileIssues.length}):</p>
+                        {fileIssues.slice(0, 2).map((issue, idx) => (
+                          <p key={idx} className="text-gray-300 ml-2">
+                            • <span className={`font-semibold ${
+                              issue.impact === 'high' ? 'text-red-400' :
+                              issue.impact === 'medium' ? 'text-yellow-400' :
+                              'text-blue-400'
+                            }`}>
+                              [{issue.impact.toUpperCase()}]
+                            </span> {issue.title}
+                          </p>
+                        ))}
+                      </div>
+                    );
+                  })()}
+                </>
+              )}
+
+              {/* DevOps Role - Show test results */}
+              {role === 'devops' && analysis?.devOpsData?.testResults[hoveredFile.path] && (
+                <>
+                  <p><span className="text-gray-500">Language:</span> {hoveredFile.language}</p>
+                  <p><span className="text-gray-500">Lines:</span> {hoveredFile.linesOfCode}</p>
+                  <div className="mt-2 pt-2 border-t border-gray-700">
+                    <p className="text-gray-500 mb-1">Test Results:</p>
+                    {analysis.devOpsData.testResults[hoveredFile.path].map((test, idx) => (
+                      <div key={idx} className="text-gray-300 ml-2 mb-1">
+                        <p className="font-semibold uppercase">{test.llm}:</p>
+                        <p className={`ml-2 ${test.passed ? 'text-green-400' : 'text-red-400'}`}>
+                          {test.passedTests}/{test.totalTests} passed ({test.coverage}% coverage)
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           </div>
@@ -597,6 +780,23 @@ export default function EnhancedRepo3DViewer({ owner, repo, role = 'developer' }
           )}
         </button>
       </div>
+
+      {/* Finance Pie Chart (Below Sync Button) */}
+      {role === 'finance' && analysis?.financeData && (
+        <div className="absolute top-20 right-4">
+          <FinancePieChart budgetAllocation={analysis.financeData.budgetAllocation} />
+        </div>
+      )}
+
+      {/* PM SCRUM Chart (Top Right) */}
+      {role === 'pm' && analysis?.pmData?.currentSprint && (
+        <div className="absolute top-4 right-4 mr-40">
+          <ScrumChart
+            currentSprint={analysis.pmData.currentSprint}
+            sprints={analysis.pmData.sprints}
+          />
+        </div>
+      )}
 
       {/* Legend */}
       {analysis && (

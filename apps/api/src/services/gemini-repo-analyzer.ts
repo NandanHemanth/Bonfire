@@ -3,6 +3,7 @@ import { Octokit } from '@octokit/rest';
 import fs from 'fs/promises';
 import path from 'path';
 import dotenv from 'dotenv';
+import { generateAllRoleData } from './role-data-generator.js';
 
 dotenv.config();
 
@@ -167,11 +168,20 @@ export async function analyzeRepositoryWithGemini(
 
     analysis.stats.totalConnections = analysis.connections.length;
 
-    // Save analysis as JSON
-    await saveAnalysisJSON(owner, repo, analysis);
+    // Generate role-based data
+    console.log('Generating role-based data...');
+    const filePaths = analysis.files.map(f => f.path);
+    const roleData = await generateAllRoleData(owner, repo, filePaths);
+
+    // Save analysis as JSON with role data
+    const fullAnalysis = {
+      ...analysis,
+      ...roleData
+    };
+    await saveAnalysisJSON(owner, repo, fullAnalysis);
 
     console.log(`Analysis complete for ${owner}/${repo}`);
-    return analysis;
+    return fullAnalysis;
   } catch (error: any) {
     console.error('Gemini analysis error:', error);
     throw new Error(`Failed to analyze repository with Gemini: ${error.message}`);
