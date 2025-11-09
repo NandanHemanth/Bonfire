@@ -189,27 +189,43 @@ router.post('/open-in-vscode', async (req, res, next) => {
     // Construct the file path in the local repository
     const { exec } = await import('child_process');
     const { promisify } = await import('util');
+    const fs = await import('fs');
+    const path = await import('path');
     const execAsync = promisify(exec);
 
-    // Get the directory where the file is located
-    const parts = filePath.split('/');
-    const parentDir = parts.slice(0, -1).join('/');
-    const repoPath = `repos/${owner}/${repo}`;
-    const fullFilePath = `${repoPath}/${filePath}`;
+    const repoPath = path.join(process.cwd(), 'repos', owner, repo);
+    const fullFilePath = path.join(repoPath, filePath);
 
     // Check if repo exists locally, if not clone it
     try {
+      if (!fs.existsSync(repoPath)) {
+        console.log(`Repository not found locally, cloning ${owner}/${repo}...`);
+
+        // Create repos directory if it doesn't exist
+        const reposDir = path.join(process.cwd(), 'repos', owner);
+        if (!fs.existsSync(reposDir)) {
+          fs.mkdirSync(reposDir, { recursive: true });
+        }
+
+        // Clone the repository
+        const cloneUrl = `https://github.com/${owner}/${repo}.git`;
+        await execAsync(`git clone ${cloneUrl} "${repoPath}"`);
+        console.log(`Successfully cloned ${owner}/${repo}`);
+      }
+
+      // Open the file in VSCode
       await execAsync(`code "${fullFilePath}"`);
+
       res.json({
         success: true,
         message: `Opening ${filePath} in VSCode`,
         path: fullFilePath
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('VSCode open error:', error);
       res.status(500).json({
         error: 'Failed to open file in VSCode',
-        message: 'Make sure VSCode is installed and the "code" command is available in PATH'
+        message: error.message || 'Make sure VSCode is installed and the "code" command is available in PATH'
       });
     }
   } catch (error) {

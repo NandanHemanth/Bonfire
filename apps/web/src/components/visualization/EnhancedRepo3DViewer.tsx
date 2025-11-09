@@ -289,12 +289,13 @@ export default function EnhancedRepo3DViewer({ owner, repo, role = 'developer' }
   const createEnhancedVisualization = (scene: THREE.Scene, data: RepositoryAnalysis) => {
     meshToFileMap.current.clear();
 
-    // Group files by directory
+    // Group files by directory - use full directory path
     const directoryMap = new Map<string, FileAnalysis[]>();
 
     data.files.forEach(file => {
       const parts = file.path.split('/');
-      const dir = parts.length > 1 ? parts[0] : 'root';
+      // Get full directory path (everything except the filename)
+      const dir = parts.length > 1 ? parts.slice(0, -1).join('/') : 'root';
 
       if (!directoryMap.has(dir)) {
         directoryMap.set(dir, []);
@@ -348,11 +349,12 @@ export default function EnhancedRepo3DViewer({ owner, repo, role = 'developer' }
         const fy = Math.sin(fileAngle) * 1.5;
         const fz = z + Math.sin(fileAngle) * fileRadius;
 
-        // Create file mesh - thin blue rectangle
+        // Create file mesh - thin rectangle with color based on status
         const fileGeometry = new THREE.BoxGeometry(0.4, 0.8, 0.1); // Thin rectangular
+        const fileColor = getFileStatusColor(file.status);
         const fileMaterial = new THREE.MeshPhongMaterial({
-          color: 0x4a90e2, // Blue
-          emissive: 0x4a90e2,
+          color: fileColor,
+          emissive: fileColor,
           emissiveIntensity: 0.2
         });
         const fileMesh = new THREE.Mesh(fileGeometry, fileMaterial);
@@ -601,10 +603,20 @@ export default function EnhancedRepo3DViewer({ owner, repo, role = 'developer' }
         <div className="absolute bottom-4 left-4 bg-gray-900 bg-opacity-90 p-4 rounded-lg text-sm max-w-xs">
           <h3 className="font-bold text-white mb-2">Legend</h3>
           <div className="space-y-2 text-xs">
+            <p className="text-gray-400 font-semibold mb-1">File Status:</p>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-green-500"></div>
+              <span className="text-gray-300">New/Modified Files</span>
+            </div>
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-blue-500"></div>
-              <span className="text-gray-300">Files (Thin Blue)</span>
+              <span className="text-gray-300">Unchanged Files</span>
             </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-red-500"></div>
+              <span className="text-gray-300">Deleted Files</span>
+            </div>
+            <p className="text-gray-400 font-semibold mt-3 mb-1">Elements:</p>
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-blue-400 opacity-40"></div>
               <span className="text-gray-300">Folders (Translucent)</span>
