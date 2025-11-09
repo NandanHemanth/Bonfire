@@ -12,20 +12,13 @@ import ReactFlow, {
   EdgeChange,
   Connection,
   MiniMap,
+  Viewport,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import {
-  MessageSquare,
   Workflow,
   Plus,
-  Send,
   Sparkles,
-  Database,
-  Mail,
-  Calendar,
-  FileText,
-  Cloud,
-  Zap,
   Save,
   Play,
   Trash2,
@@ -64,6 +57,9 @@ export default function CanvasWorkflowBuilder() {
   const [workflowDescription, setWorkflowDescription] = useState('');
   const [workflowRole, setWorkflowRole] = useState<string>('developer');
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
+  
+  // Fixed viewport - canvas stays in place
+  const defaultViewport: Viewport = { x: 0, y: 0, zoom: 1 };
 
   useEffect(() => {
     fetchWorkflows();
@@ -337,9 +333,9 @@ export default function CanvasWorkflowBuilder() {
         </div>
 
         {/* Canvas and Chat Container */}
-        <div className="flex-1 flex relative">
+        <div className="flex-1 flex relative overflow-hidden">
           {/* ReactFlow Canvas - White Background */}
-          <div ref={reactFlowWrapper} className="flex-1 relative white-canvas-container overflow-hidden">
+          <div ref={reactFlowWrapper} className="flex-1 relative">
             <ReactFlow
               nodes={nodes}
               edges={edges}
@@ -350,7 +346,12 @@ export default function CanvasWorkflowBuilder() {
               onDragOver={onDragOver}
               onNodeClick={onNodeClick}
               nodeTypes={nodeTypes}
-              fitView
+              defaultViewport={defaultViewport}
+              minZoom={0.5}
+              maxZoom={2}
+              fitView={false}
+              panOnDrag={true}
+              zoomOnScroll={true}
               className="bg-white"
             >
               <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="#d1d5db" />

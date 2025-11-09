@@ -77,6 +77,13 @@ const nodeTypes: NodeType[] = [
   { type: 'api-call', label: 'API Call', icon: 'action', color: '#8B5CF6', category: 'Actions' },
   { type: 'condition', label: 'Condition', icon: 'branch', color: '#F59E0B', category: 'Actions' },
   { type: 'code', label: 'Run Code', icon: 'code', color: '#10B981', category: 'Actions' },
+
+  // Roles
+  { type: 'developer', label: 'Developer', icon: 'user', color: '#3B82F6', category: 'Roles' },
+  { type: 'pm', label: 'PM', icon: 'user', color: '#8B5CF6', category: 'Roles' },
+  { type: 'finance', label: 'Finance', icon: 'user', color: '#10B981', category: 'Roles' },
+  { type: 'hr', label: 'HR', icon: 'user', color: '#F59E0B', category: 'Roles' },
+  { type: 'devops', label: 'DevOps', icon: 'user', color: '#EF4444', category: 'Roles' },
 ];
 
 interface Props {
