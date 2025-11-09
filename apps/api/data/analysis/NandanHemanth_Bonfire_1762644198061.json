@@ -1,0 +1,1760 @@
+{
+  "owner": "NandanHemanth",
+  "repo": "Bonfire",
+  "branch": "main",
+  "files": [
+    {
+      "path": "apps/api/src/middleware/errorHandler.ts",
+      "functions": [
+        {
+          "name": "errorHandler",
+          "line": 9,
+          "params": []
+        }
+      ],
+      "imports": [
+        "./logger.js"
+      ],
+      "exports": [
+        "errorHandler"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 35,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/middleware/logger.ts",
+      "functions": [
+        {
+          "name": "loggingMiddleware",
+          "line": 29,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "loggingMiddleware"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 47,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/routes/data.ts",
+      "functions": [],
+      "imports": [
+        "../services/data-analyzer.js"
+      ],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 27,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/routes/mcp.ts",
+      "functions": [],
+      "imports": [
+        "../services/mcp-orchestrator.js"
+      ],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 35,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/routes/repos.ts",
+      "functions": [],
+      "imports": [
+        "../services/github-parser.js",
+        "../services/gemini-analyzer.js",
+        "../services/code-analyzer.js",
+        "../services/ai-analyzer.js"
+      ],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 87,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/routes/workflows.ts",
+      "functions": [],
+      "imports": [
+        "../services/gemini-workflow-generator.js",
+        "../services/dedalus-client.js"
+      ],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 229,
+      "language": "TypeScript",
+      "status": "modified"
+    },
+    {
+      "path": "apps/api/src/server.ts",
+      "functions": [],
+      "imports": [
+        "./middleware/logger.js",
+        "./middleware/errorHandler.js",
+        "./routes/repos.js",
+        "./routes/data.js",
+        "./routes/mcp.js",
+        "./routes/workflows.js"
+      ],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 77,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/services/ai-analyzer.ts",
+      "functions": [
+        {
+          "name": "analyzeRepositoryWithAI",
+          "line": 42,
+          "params": []
+        },
+        {
+          "name": "enhanceAnalysisWithAI",
+          "line": 200,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 232,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/services/code-analyzer.ts",
+      "functions": [
+        {
+          "name": "analyzeRepository",
+          "line": 54,
+          "params": []
+        },
+        {
+          "name": "buildFileHierarchy",
+          "line": 112,
+          "params": []
+        },
+        {
+          "name": "isCodeFile",
+          "line": 148,
+          "params": []
+        },
+        {
+          "name": "fetchFileContent",
+          "line": 153,
+          "params": []
+        },
+        {
+          "name": "analyzeFileContent",
+          "line": 171,
+          "params": []
+        },
+        {
+          "name": "buildConnectionGraph",
+          "line": 288,
+          "params": []
+        },
+        {
+          "name": "resolvePath",
+          "line": 330,
+          "params": []
+        },
+        {
+          "name": "detectIntegrations",
+          "line": 344,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 395,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/services/data-analyzer.ts",
+      "functions": [
+        {
+          "name": "analyzeDataset",
+          "line": 1,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 32,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/services/dedalus-client.ts",
+      "functions": [
+        {
+          "name": "getDedalusClient",
+          "line": 285,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "DedalusClient",
+        "getDedalusClient"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 291,
+      "language": "TypeScript",
+      "status": "new"
+    },
+    {
+      "path": "apps/api/src/services/gemini-analyzer.ts",
+      "functions": [
+        {
+          "name": "generateRepoLegend",
+          "line": 15,
+          "params": []
+        },
+        {
+          "name": "createFileTreeMarkdown",
+          "line": 68,
+          "params": []
+        },
+        {
+          "name": "generateFallbackLegend",
+          "line": 108,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 152,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/services/gemini-workflow-generator.ts",
+      "functions": [
+        {
+          "name": "generateWorkflowFromPrompt",
+          "line": 13,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "serviceColors"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 128,
+      "language": "TypeScript",
+      "status": "new"
+    },
+    {
+      "path": "apps/api/src/services/github-parser.ts",
+      "functions": [
+        {
+          "name": "parseRepository",
+          "line": 11,
+          "params": []
+        },
+        {
+          "name": "analyzeCodeStructure",
+          "line": 39,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 58,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/services/integration-clients.ts",
+      "functions": [],
+      "imports": [],
+      "exports": [
+        "SlackIntegrationClient",
+        "JiraIntegrationClient",
+        "MicrosoftGraphClient",
+        "MicrosoftOAuthManager",
+        "GitHubIntegrationClient"
+      ],
+      "apiCalls": [
+        {
+          "method": "GET",
+          "endpoint": "${this.baseUrl}/rest/api/3/issue/${issueKey}",
+          "line": 79,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "${this.baseUrl}/rest/api/3/myself",
+          "line": 91,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "${this.baseUrl}/user",
+          "line": 276,
+          "type": "rest"
+        }
+      ],
+      "linesOfCode": 283,
+      "language": "TypeScript",
+      "status": "new"
+    },
+    {
+      "path": "apps/api/src/services/mcp-orchestrator.ts",
+      "functions": [
+        {
+          "name": "triggerMCPAction",
+          "line": 1,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 16,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/services/pdf-generator.ts",
+      "functions": [
+        {
+          "name": "generatePdf",
+          "line": 5,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "generatePdf"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 46,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/api/src/services/workflow-manager.ts",
+      "functions": [
+        {
+          "name": "createWorkflow",
+          "line": 77,
+          "params": []
+        },
+        {
+          "name": "addNodeToWorkflow",
+          "line": 93,
+          "params": []
+        },
+        {
+          "name": "connectNodes",
+          "line": 110,
+          "params": []
+        },
+        {
+          "name": "createIntegration",
+          "line": 127,
+          "params": []
+        },
+        {
+          "name": "testIntegration",
+          "line": 138,
+          "params": []
+        },
+        {
+          "name": "testSlackIntegration",
+          "line": 167,
+          "params": []
+        },
+        {
+          "name": "testJiraIntegration",
+          "line": 187,
+          "params": []
+        },
+        {
+          "name": "testGitHubIntegration",
+          "line": 206,
+          "params": []
+        },
+        {
+          "name": "testDatabaseIntegration",
+          "line": 224,
+          "params": []
+        },
+        {
+          "name": "testMCPIntegration",
+          "line": 229,
+          "params": []
+        },
+        {
+          "name": "testCustomAPIIntegration",
+          "line": 238,
+          "params": []
+        },
+        {
+          "name": "getWorkflow",
+          "line": 265,
+          "params": []
+        },
+        {
+          "name": "getAllWorkflows",
+          "line": 269,
+          "params": []
+        },
+        {
+          "name": "getIntegration",
+          "line": 273,
+          "params": []
+        },
+        {
+          "name": "getAllIntegrations",
+          "line": 277,
+          "params": []
+        },
+        {
+          "name": "deleteWorkflow",
+          "line": 281,
+          "params": []
+        },
+        {
+          "name": "deleteIntegration",
+          "line": 285,
+          "params": []
+        },
+        {
+          "name": "updateWorkflow",
+          "line": 289,
+          "params": []
+        },
+        {
+          "name": "executeWorkflow",
+          "line": 306,
+          "params": []
+        },
+        {
+          "name": "executeNode",
+          "line": 342,
+          "params": []
+        },
+        {
+          "name": "generateId",
+          "line": 366,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "createWorkflow",
+        "addNodeToWorkflow",
+        "connectNodes",
+        "createIntegration",
+        "getWorkflow",
+        "getAllWorkflows",
+        "getIntegration",
+        "getAllIntegrations",
+        "deleteWorkflow",
+        "deleteIntegration",
+        "updateWorkflow",
+        "presetIntegrations"
+      ],
+      "apiCalls": [
+        {
+          "method": "GET",
+          "endpoint": "${config.baseUrl}/rest/api/3/myself",
+          "line": 194,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "https://api.github.com/user",
+          "line": 212,
+          "type": "rest"
+        }
+      ],
+      "linesOfCode": 403,
+      "language": "TypeScript",
+      "status": "modified"
+    },
+    {
+      "path": "apps/vscode-extension/src/extension.ts",
+      "functions": [
+        {
+          "name": "activate",
+          "line": 6,
+          "params": []
+        },
+        {
+          "name": "deactivate",
+          "line": 87,
+          "params": []
+        }
+      ],
+      "imports": [
+        "./views/BonFireViewProvider",
+        "./views/DependencyTreeProvider",
+        "./views/MCPStatusProvider"
+      ],
+      "exports": [
+        "activate",
+        "deactivate"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 90,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/vscode-extension/src/views/BonFireViewProvider.ts",
+      "functions": [
+        {
+          "name": "visualize",
+          "line": 114,
+          "params": []
+        },
+        {
+          "name": "analyze",
+          "line": 121,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "BonFireViewProvider"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 132,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/vscode-extension/src/views/DependencyTreeProvider.ts",
+      "functions": [],
+      "imports": [],
+      "exports": [
+        "Dependency",
+        "DependencyTreeProvider"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 67,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/vscode-extension/src/views/MCPStatusProvider.ts",
+      "functions": [],
+      "imports": [],
+      "exports": [
+        "MCPStatusProvider"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 58,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/postcss.config.js",
+      "functions": [],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 7,
+      "language": "JavaScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/App.tsx",
+      "functions": [
+        {
+          "name": "App",
+          "line": 14,
+          "params": []
+        }
+      ],
+      "imports": [
+        "./components/Navigation",
+        "./components/views/DeveloperView",
+        "./components/views/FinanceView",
+        "./components/views/HRView",
+        "./components/views/PMView",
+        "./components/views/DevOpsView",
+        "./components/data/DataAnalyzer",
+        "./components/workflows/CanvasWorkflowBuilder"
+      ],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 40,
+      "language": "TypeScript",
+      "status": "modified"
+    },
+    {
+      "path": "apps/web/src/components/Navigation.tsx",
+      "functions": [
+        {
+          "name": "Navigation",
+          "line": 9,
+          "params": []
+        }
+      ],
+      "imports": [
+        "../App"
+      ],
+      "exports": [
+        "Navigation"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 62,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/data/DataAnalyzer.tsx",
+      "functions": [
+        {
+          "name": "DataAnalyzer",
+          "line": 1,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "DataAnalyzer"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 31,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/views/DevOpsView.tsx",
+      "functions": [
+        {
+          "name": "DevOpsView",
+          "line": 1,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "DevOpsView"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 35,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/views/DeveloperView.tsx",
+      "functions": [
+        {
+          "name": "DeveloperView",
+          "line": 4,
+          "params": []
+        },
+        {
+          "name": "handleVisualize",
+          "line": 9,
+          "params": []
+        },
+        {
+          "name": "handleQuickVisualize",
+          "line": 35,
+          "params": []
+        }
+      ],
+      "imports": [
+        "../visualization/CleanVisualization"
+      ],
+      "exports": [
+        "DeveloperView"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 126,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/views/FinanceView.tsx",
+      "functions": [
+        {
+          "name": "FinanceView",
+          "line": 1,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "FinanceView"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 50,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/views/HRView.tsx",
+      "functions": [
+        {
+          "name": "HRView",
+          "line": 1,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "HRView"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 31,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/views/PMView.tsx",
+      "functions": [
+        {
+          "name": "PMView",
+          "line": 1,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "PMView"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 26,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/visualization/CleanVisualization.tsx",
+      "functions": [
+        {
+          "name": "CleanVisualization",
+          "line": 79,
+          "params": []
+        },
+        {
+          "name": "handleMouseMove",
+          "line": 178,
+          "params": []
+        },
+        {
+          "name": "fetchAndVisualize",
+          "line": 256,
+          "params": []
+        },
+        {
+          "name": "animate",
+          "line": 299,
+          "params": []
+        },
+        {
+          "name": "handleResize",
+          "line": 307,
+          "params": []
+        },
+        {
+          "name": "toggleFilter",
+          "line": 398,
+          "params": []
+        },
+        {
+          "name": "renderCleanVisualization",
+          "line": 662,
+          "params": []
+        },
+        {
+          "name": "addAIDataFromHierarchy",
+          "line": 689,
+          "params": []
+        },
+        {
+          "name": "renderCleanHierarchy",
+          "line": 760,
+          "params": []
+        },
+        {
+          "name": "indicator",
+          "line": 837,
+          "params": []
+        },
+        {
+          "name": "renderDirectionalConnections",
+          "line": 848,
+          "params": []
+        },
+        {
+          "name": "addArrowHead",
+          "line": 943,
+          "params": []
+        },
+        {
+          "name": "renderAPIMarkers",
+          "line": 959,
+          "params": []
+        },
+        {
+          "name": "getCleanFileColor",
+          "line": 988,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "CleanVisualization"
+      ],
+      "apiCalls": [
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/deep-analysis",
+          "line": 262,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/integrations",
+          "line": 279,
+          "type": "rest"
+        }
+      ],
+      "linesOfCode": 1008,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/visualization/Enhanced3DViewer.tsx",
+      "functions": [
+        {
+          "name": "Enhanced3DViewer",
+          "line": 54,
+          "params": []
+        },
+        {
+          "name": "fetchAndVisualize",
+          "line": 117,
+          "params": []
+        },
+        {
+          "name": "animate",
+          "line": 147,
+          "params": []
+        },
+        {
+          "name": "handleResize",
+          "line": 155,
+          "params": []
+        },
+        {
+          "name": "toggleFilter",
+          "line": 194,
+          "params": []
+        },
+        {
+          "name": "renderVisualization",
+          "line": 378,
+          "params": []
+        },
+        {
+          "name": "renderFileHierarchy",
+          "line": 406,
+          "params": []
+        },
+        {
+          "name": "renderFunctions",
+          "line": 452,
+          "params": []
+        },
+        {
+          "name": "renderConnections",
+          "line": 477,
+          "params": []
+        },
+        {
+          "name": "renderAPIs",
+          "line": 500,
+          "params": []
+        },
+        {
+          "name": "getFileColor",
+          "line": 525,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "Enhanced3DViewer"
+      ],
+      "apiCalls": [
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/deep-analysis",
+          "line": 123,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/integrations",
+          "line": 130,
+          "type": "rest"
+        }
+      ],
+      "linesOfCode": 545,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/visualization/Repo3DViewer.tsx",
+      "functions": [
+        {
+          "name": "Repo3DViewer",
+          "line": 20,
+          "params": []
+        },
+        {
+          "name": "fetchAndVisualize",
+          "line": 66,
+          "params": []
+        },
+        {
+          "name": "animate",
+          "line": 95,
+          "params": []
+        },
+        {
+          "name": "handleResize",
+          "line": 103,
+          "params": []
+        },
+        {
+          "name": "fetchLegend",
+          "line": 121,
+          "params": []
+        },
+        {
+          "name": "createVisualizationFromData",
+          "line": 197,
+          "params": []
+        },
+        {
+          "name": "fileAngle",
+          "line": 245,
+          "params": []
+        },
+        {
+          "name": "createDemoVisualization",
+          "line": 281,
+          "params": []
+        },
+        {
+          "name": "angle",
+          "line": 301,
+          "params": []
+        },
+        {
+          "name": "fileAngle",
+          "line": 326,
+          "params": []
+        },
+        {
+          "name": "getFileColor",
+          "line": 349,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "Repo3DViewer"
+      ],
+      "apiCalls": [
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}",
+          "line": 71,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/legend",
+          "line": 124,
+          "type": "rest"
+        }
+      ],
+      "linesOfCode": 372,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx",
+      "functions": [
+        {
+          "name": "CanvasWorkflowBuilder",
+          "line": 53,
+          "params": []
+        },
+        {
+          "name": "fetchWorkflows",
+          "line": 72,
+          "params": []
+        },
+        {
+          "name": "saveWorkflow",
+          "line": 166,
+          "params": []
+        },
+        {
+          "name": "loadWorkflow",
+          "line": 198,
+          "params": []
+        },
+        {
+          "name": "createNewWorkflow",
+          "line": 204,
+          "params": []
+        },
+        {
+          "name": "handleCreateWorkflow",
+          "line": 213,
+          "params": []
+        },
+        {
+          "name": "runWorkflow",
+          "line": 256,
+          "params": []
+        }
+      ],
+      "imports": [
+        "./WorkflowNode",
+        "./GeminiChat",
+        "./NodeLibrary",
+        "./WorkflowSidebar",
+        "./NodeConfigPanel"
+      ],
+      "exports": [
+        "CanvasWorkflowBuilder"
+      ],
+      "apiCalls": [
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/workflows",
+          "line": 74,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/workflows",
+          "line": 220,
+          "type": "rest"
+        }
+      ],
+      "linesOfCode": 498,
+      "language": "TypeScript",
+      "status": "new"
+    },
+    {
+      "path": "apps/web/src/components/workflows/GeminiChat.tsx",
+      "functions": [
+        {
+          "name": "GeminiChat",
+          "line": 15,
+          "params": []
+        },
+        {
+          "name": "handleSend",
+          "line": 31,
+          "params": []
+        },
+        {
+          "name": "handleKeyPress",
+          "line": 79,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "GeminiChat"
+      ],
+      "apiCalls": [
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/workflows/generate",
+          "line": 40,
+          "type": "rest"
+        }
+      ],
+      "linesOfCode": 165,
+      "language": "TypeScript",
+      "status": "new"
+    },
+    {
+      "path": "apps/web/src/components/workflows/NodeConfigPanel.tsx",
+      "functions": [
+        {
+          "name": "NodeConfigPanel",
+          "line": 14,
+          "params": []
+        },
+        {
+          "name": "handleSave",
+          "line": 21,
+          "params": []
+        },
+        {
+          "name": "renderConfigFields",
+          "line": 26,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "NodeConfigPanel"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 422,
+      "language": "TypeScript",
+      "status": "new"
+    },
+    {
+      "path": "apps/web/src/components/workflows/NodeLibrary.tsx",
+      "functions": [
+        {
+          "name": "NodeLibrary",
+          "line": 86,
+          "params": []
+        },
+        {
+          "name": "onDragStart",
+          "line": 87,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "NodeLibrary"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 142,
+      "language": "TypeScript",
+      "status": "new"
+    },
+    {
+      "path": "apps/web/src/components/workflows/WorkflowBuilder.tsx",
+      "functions": [
+        {
+          "name": "WorkflowBuilder",
+          "line": 27,
+          "params": []
+        },
+        {
+          "name": "fetchWorkflows",
+          "line": 41,
+          "params": []
+        },
+        {
+          "name": "fetchIntegrations",
+          "line": 53,
+          "params": []
+        },
+        {
+          "name": "fetchPresetIntegrations",
+          "line": 65,
+          "params": []
+        },
+        {
+          "name": "createWorkflow",
+          "line": 77,
+          "params": []
+        },
+        {
+          "name": "createIntegration",
+          "line": 95,
+          "params": []
+        },
+        {
+          "name": "testIntegration",
+          "line": 113,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "WorkflowBuilder"
+      ],
+      "apiCalls": [
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/workflows",
+          "line": 43,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/integrations",
+          "line": 55,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/integrations/presets",
+          "line": 67,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/workflows",
+          "line": 79,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/integrations",
+          "line": 97,
+          "type": "rest"
+        },
+        {
+          "method": "GET",
+          "endpoint": "http://localhost:3001/api/integrations/${integrationId}/test",
+          "line": 115,
+          "type": "rest"
+        }
+      ],
+      "linesOfCode": 310,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/src/components/workflows/WorkflowNode.tsx",
+      "functions": [
+        {
+          "name": "WorkflowNode",
+          "line": 33,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 63,
+      "language": "TypeScript",
+      "status": "new"
+    },
+    {
+      "path": "apps/web/src/components/workflows/WorkflowSidebar.tsx",
+      "functions": [
+        {
+          "name": "WorkflowSidebar",
+          "line": 19,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "WorkflowSidebar"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 88,
+      "language": "TypeScript",
+      "status": "new"
+    },
+    {
+      "path": "apps/web/src/main.tsx",
+      "functions": [],
+      "imports": [
+        "./App"
+      ],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 11,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/tailwind.config.js",
+      "functions": [],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 26,
+      "language": "JavaScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "apps/web/vite.config.ts",
+      "functions": [],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 28,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "packages/mcp-servers/cicd/src/index.ts",
+      "functions": [
+        {
+          "name": "main",
+          "line": 143,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 150,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "packages/mcp-servers/finance/src/index.ts",
+      "functions": [
+        {
+          "name": "main",
+          "line": 156,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 163,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "packages/mcp-servers/hr/src/index.ts",
+      "functions": [
+        {
+          "name": "main",
+          "line": 128,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 135,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "packages/mcp-servers/security/src/index.ts",
+      "functions": [
+        {
+          "name": "main",
+          "line": 168,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 175,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "packages/shared/types/index.ts",
+      "functions": [],
+      "imports": [],
+      "exports": [],
+      "apiCalls": [],
+      "linesOfCode": 191,
+      "language": "TypeScript",
+      "status": "unchanged"
+    },
+    {
+      "path": "packages/shared/utils/index.ts",
+      "functions": [
+        {
+          "name": "formatBytes",
+          "line": 4,
+          "params": []
+        },
+        {
+          "name": "calculateCorrelation",
+          "line": 19,
+          "params": []
+        },
+        {
+          "name": "calculateStatistics",
+          "line": 38,
+          "params": []
+        },
+        {
+          "name": "getColorForValue",
+          "line": 70,
+          "params": []
+        },
+        {
+          "name": "normalized",
+          "line": 76,
+          "params": []
+        },
+        {
+          "name": "generateId",
+          "line": 142,
+          "params": []
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "formatBytes",
+        "calculateCorrelation",
+        "calculateStatistics",
+        "getColorForValue",
+        "debounce",
+        "throttle",
+        "deepClone",
+        "generateId"
+      ],
+      "apiCalls": [],
+      "linesOfCode": 145,
+      "language": "TypeScript",
+      "status": "unchanged"
+    }
+  ],
+  "connections": [
+    {
+      "source": "apps/api/src/middleware/errorHandler.ts",
+      "target": "./logger.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/routes/data.ts",
+      "target": "../services/data-analyzer.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/routes/mcp.ts",
+      "target": "../services/mcp-orchestrator.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/routes/repos.ts",
+      "target": "../services/github-parser.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/routes/repos.ts",
+      "target": "../services/gemini-analyzer.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/routes/repos.ts",
+      "target": "../services/code-analyzer.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/routes/repos.ts",
+      "target": "../services/ai-analyzer.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/routes/workflows.ts",
+      "target": "../services/gemini-workflow-generator.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/routes/workflows.ts",
+      "target": "../services/dedalus-client.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/server.ts",
+      "target": "./middleware/logger.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/server.ts",
+      "target": "./middleware/errorHandler.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/server.ts",
+      "target": "./routes/repos.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/server.ts",
+      "target": "./routes/data.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/server.ts",
+      "target": "./routes/mcp.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/api/src/server.ts",
+      "target": "./routes/workflows.js",
+      "type": "import"
+    },
+    {
+      "source": "apps/vscode-extension/src/extension.ts",
+      "target": "./views/BonFireViewProvider",
+      "type": "import"
+    },
+    {
+      "source": "apps/vscode-extension/src/extension.ts",
+      "target": "./views/DependencyTreeProvider",
+      "type": "import"
+    },
+    {
+      "source": "apps/vscode-extension/src/extension.ts",
+      "target": "./views/MCPStatusProvider",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/App.tsx",
+      "target": "./components/Navigation",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/App.tsx",
+      "target": "./components/views/DeveloperView",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/App.tsx",
+      "target": "./components/views/FinanceView",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/App.tsx",
+      "target": "./components/views/HRView",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/App.tsx",
+      "target": "./components/views/PMView",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/App.tsx",
+      "target": "./components/views/DevOpsView",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/App.tsx",
+      "target": "./components/data/DataAnalyzer",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/App.tsx",
+      "target": "./components/workflows/CanvasWorkflowBuilder",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/components/Navigation.tsx",
+      "target": "../App",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/components/views/DeveloperView.tsx",
+      "target": "../visualization/CleanVisualization",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx",
+      "target": "./WorkflowNode",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx",
+      "target": "./GeminiChat",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx",
+      "target": "./NodeLibrary",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx",
+      "target": "./WorkflowSidebar",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx",
+      "target": "./NodeConfigPanel",
+      "type": "import"
+    },
+    {
+      "source": "apps/web/src/main.tsx",
+      "target": "./App",
+      "type": "import"
+    }
+  ],
+  "apiEndpoints": [
+    {
+      "method": "GET",
+      "endpoint": "${this.baseUrl}/rest/api/3/issue/${issueKey}",
+      "line": 79,
+      "type": "rest",
+      "file": "apps/api/src/services/integration-clients.ts"
+    },
+    {
+      "method": "GET",
+      "endpoint": "${this.baseUrl}/rest/api/3/myself",
+      "line": 91,
+      "type": "rest",
+      "file": "apps/api/src/services/integration-clients.ts"
+    },
+    {
+      "method": "GET",
+      "endpoint": "${this.baseUrl}/user",
+      "line": 276,
+      "type": "rest",
+      "file": "apps/api/src/services/integration-clients.ts"
+    },
+    {
+      "method": "GET",
+      "endpoint": "${config.baseUrl}/rest/api/3/myself",
+      "line": 194,
+      "type": "rest",
+      "file": "apps/api/src/services/workflow-manager.ts"
+    },
+    {
+      "method": "GET",
+      "endpoint": "https://api.github.com/user",
+      "line": 212,
+      "type": "rest",
+      "file": "apps/api/src/services/workflow-manager.ts"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/deep-analysis",
+      "line": 262,
+      "type": "rest",
+      "file": "apps/web/src/components/visualization/CleanVisualization.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/integrations",
+      "line": 279,
+      "type": "rest",
+      "file": "apps/web/src/components/visualization/CleanVisualization.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/deep-analysis",
+      "line": 123,
+      "type": "rest",
+      "file": "apps/web/src/components/visualization/Enhanced3DViewer.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/integrations",
+      "line": 130,
+      "type": "rest",
+      "file": "apps/web/src/components/visualization/Enhanced3DViewer.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}",
+      "line": 71,
+      "type": "rest",
+      "file": "apps/web/src/components/visualization/Repo3DViewer.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/repos/${owner}/${repo}/legend",
+      "line": 124,
+      "type": "rest",
+      "file": "apps/web/src/components/visualization/Repo3DViewer.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/workflows",
+      "line": 74,
+      "type": "rest",
+      "file": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/workflows",
+      "line": 220,
+      "type": "rest",
+      "file": "apps/web/src/components/workflows/CanvasWorkflowBuilder.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/workflows/generate",
+      "line": 40,
+      "type": "rest",
+      "file": "apps/web/src/components/workflows/GeminiChat.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/workflows",
+      "line": 43,
+      "type": "rest",
+      "file": "apps/web/src/components/workflows/WorkflowBuilder.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/integrations",
+      "line": 55,
+      "type": "rest",
+      "file": "apps/web/src/components/workflows/WorkflowBuilder.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/integrations/presets",
+      "line": 67,
+      "type": "rest",
+      "file": "apps/web/src/components/workflows/WorkflowBuilder.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/workflows",
+      "line": 79,
+      "type": "rest",
+      "file": "apps/web/src/components/workflows/WorkflowBuilder.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/integrations",
+      "line": 97,
+      "type": "rest",
+      "file": "apps/web/src/components/workflows/WorkflowBuilder.tsx"
+    },
+    {
+      "method": "GET",
+      "endpoint": "http://localhost:3001/api/integrations/${integrationId}/test",
+      "line": 115,
+      "type": "rest",
+      "file": "apps/web/src/components/workflows/WorkflowBuilder.tsx"
+    }
+  ],
+  "timestamp": "2025-11-08T23:23:09.772Z",
+  "commitSha": "ae18f8000d18eadeb81c7fbbc2a026c42b90e3e4",
+  "stats": {
+    "totalFiles": 50,
+    "totalFunctions": 127,
+    "totalConnections": 34,
+    "totalAPIs": 20,
+    "languages": {
+      "TypeScript": 48,
+      "JavaScript": 2
+    }
+  }
+}

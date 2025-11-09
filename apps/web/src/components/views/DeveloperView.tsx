@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CleanVisualization from '../visualization/CleanVisualization';
+import EnhancedRepo3DViewer from '../visualization/EnhancedRepo3DViewer';
 
 export default function DeveloperView() {
   const [repoUrl, setRepoUrl] = useState('');
@@ -78,10 +78,13 @@ export default function DeveloperView() {
               <h3 className="font-semibold mb-4">Features:</h3>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>✓ Interactive 3D repository visualization</li>
-                <li>✓ Color-coded files by language</li>
-                <li>✓ Directory structure mapping</li>
-                <li>✓ Real-time navigation with mouse controls</li>
-                <li>✓ Automatic GitHub API integration</li>
+                <li>✓ Real-time sync with latest changes</li>
+                <li>✓ Color-coded files (🟢 new, 🔴 deleted, 🟠 modified, 🔵 unchanged)</li>
+                <li>✓ Gemini AI-powered code analysis</li>
+                <li>✓ File connections & API endpoint mapping</li>
+                <li>✓ Hover to see functions and API calls</li>
+                <li>✓ Translucent folder visualization</li>
+                <li>✓ Automatic JSON storage of analysis</li>
               </ul>
             </div>
           </div>
@@ -116,7 +119,7 @@ export default function DeveloperView() {
           </div>
 
           <div className="flex-1 card p-0 overflow-hidden">
-            {repoInfo && <CleanVisualization owner={repoInfo.owner} repo={repoInfo.repo} />}
+            {repoInfo && <EnhancedRepo3DViewer owner={repoInfo.owner} repo={repoInfo.repo} role="developer" />}
           </div>
         </div>
       )}
