@@ -36,7 +36,7 @@ Visit:
 BonFire solves the enterprise software development crisis by providing:
 
 1. **3D Code Visualization** - Explore any GitHub repository in interactive 3D
-2. **AI-Powered Data Analysis** - Upload CSV/Excel for instant insights
+2. **AI-Powered Data Analysis** - Upload CSV for Gemini AI analysis with auto-generated PDF reports
 3. **Cross-Functional Automation** - MCP servers connect Finance, HR, CI/CD, Security
 4. **Role-Based Views** - Tailored experiences for developers, finance, HR, PMs, DevOps
 

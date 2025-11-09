@@ -10,8 +10,15 @@ import dataRoutes from './routes/data.js';
 import mcpRoutes from './routes/mcp.js';
 import workflowRoutes from './routes/workflows.js';
 
-// Load environment variables
-dotenv.config();
+// Load environment variables from root directory
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load .env from project root (two levels up from src/)
+dotenv.config({ path: join(__dirname, '../../../.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -70,6 +77,7 @@ app.listen(PORT, () => {
   console.log(`🔥 BonFire API server running on port ${PORT}`);
   console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🌐 CORS enabled for: ${process.env.WEB_URL || 'http://localhost:3000'}`);
+  console.log(`🤖 Gemini API Key: ${process.env.GEMINI_API_KEY ? '✅ Configured' : '❌ Not configured'}`);
 });
 
 export default app;
